@@ -12,24 +12,13 @@ import 'package:synapso/core/utils/key_value_storage_base.dart';
 import 'package:synapso/core/utils/key_value_storage_service.dart';
 
 import 'app.dart';
-import 'features/settings/settings_controller.dart';
-import 'features/settings/settings_service.dart';
 
 void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
   // For preparing the key-value mem cache
   await KeyValueStorageBase.init();
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
   GetIt.I.registerSingleton<KeyValueStorageService>(KeyValueStorageService());
 
   final cacheOptions = CacheOptions(
