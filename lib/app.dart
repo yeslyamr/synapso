@@ -2,87 +2,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:synapso/core/navigation/go_router.dart';
-
-import 'features/settings/settings_controller.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
-    required this.settingsController,
   });
 
-  final SettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: settingsController,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp.router(
-          routerConfig: goRouter,
-          restorationScopeId: 'app',
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''),
-          ],
-          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: lightColorScheme,
-            splashFactory: NoSplash.splashFactory,
-            fontFamily: GoogleFonts.inter().fontFamily,
-            outlinedButtonTheme: OutlinedButtonThemeData(
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.all(8),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                backgroundColor: Colors.transparent,
-                side: const BorderSide(
-                  color: Color(0xFF0052DE),
-                  width: 1,
-                ),
-                foregroundColor: const Color(0xFF0052DE),
+    return ScreenUtilInit(
+      designSize: const Size(390, 796),
+      child: MaterialApp.router(
+        routerConfig: goRouter,
+        restorationScopeId: 'app',
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''),
+        ],
+        onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
+          splashFactory: NoSplash.splashFactory,
+          fontFamily: GoogleFonts.inter().fontFamily,
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.all(8),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              backgroundColor: Colors.transparent,
+              side: const BorderSide(
+                color: Color(0xFF0052DE),
+                width: 1,
               ),
+              foregroundColor: const Color(0xFF0052DE),
             ),
-            appBarTheme: AppBarTheme(
-              backgroundColor: const Color(0xFFFCFCFC),
-              foregroundColor: const Color(0xFF262626),
-              iconTheme: const IconThemeData(color: Color(0xFF262626)),
-              elevation: 0,
-              titleTextStyle: TextStyle(
-                fontSize: 20,
-                color: const Color(0xFF262626),
-                fontFamily: GoogleFonts.inter().fontFamily,
-                fontWeight: FontWeight.w400,
-              ),
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Color(0xFFFCFCFC),
-                statusBarIconBrightness: Brightness.dark,
-              ),
-            ),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF0052DE),
-                foregroundColor: const Color(0xFFFFFFFF),
-                disabledBackgroundColor: const Color(0xFF0052DE),
-                padding: const EdgeInsets.all(8),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              ),
-            ),
-            textTheme: const TextTheme(),
           ),
-          darkTheme: ThemeData(
-            colorScheme: darkColorScheme,
+          appBarTheme: AppBarTheme(
+            backgroundColor: const Color(0xFFFCFCFC),
+            foregroundColor: const Color(0xFF262626),
+            iconTheme: const IconThemeData(color: Color(0xFF262626)),
+            elevation: 0,
+            titleTextStyle: TextStyle(
+              fontSize: 20,
+              color: const Color(0xFF262626),
+              fontFamily: GoogleFonts.inter().fontFamily,
+              fontWeight: FontWeight.w400,
+            ),
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: Color(0xFFFCFCFC),
+              statusBarIconBrightness: Brightness.dark,
+            ),
           ),
-          themeMode: settingsController.themeMode,
-        );
-      },
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF0052DE),
+              foregroundColor: const Color(0xFFFFFFFF),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              disabledBackgroundColor: const Color(0xFF0052DE),
+              padding: const EdgeInsets.all(8),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+          ),
+          textTheme: const TextTheme(),
+        ),
+        darkTheme: ThemeData(
+          colorScheme: darkColorScheme,
+        ),
+        themeMode: ThemeMode.light,
+      ),
     );
   }
 }

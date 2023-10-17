@@ -16,8 +16,8 @@ class KeyValueStorageService {
   final _keyValueStorage = KeyValueStorageBase();
 
   /// Returns logged in user password
-  Future<String> getAuthPassword() async {
-    return await _keyValueStorage.getEncrypted(_authPasswordKey) ?? '';
+  Future<String?> getAuthPassword() async {
+    return await _keyValueStorage.getEncrypted(_authPasswordKey);
   }
 
   /// Returns last authenticated user
@@ -28,8 +28,8 @@ class KeyValueStorageService {
   // }
 
   /// Returns last authentication token
-  Future<String> getAuthToken() async {
-    return await _keyValueStorage.getEncrypted(_authTokenKey) ?? '';
+  Future<String?> getAuthToken() async {
+    return await _keyValueStorage.getEncrypted(_authTokenKey);
   }
 
   /// Sets the authentication password to this value. Even though this method is
