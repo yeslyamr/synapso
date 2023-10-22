@@ -47,34 +47,14 @@ class WelcomePage extends StatelessWidget {
                     onPressed: () {
                       context.push('/login');
                     },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      minimumSize: const Size.fromHeight(50),
-                    ),
-                    child: Text(
-                      'Log In',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    child: const Text('Log In'),
                   ),
                   SizedBox(height: 12.h),
                   OutlinedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      minimumSize: const Size.fromHeight(50),
-                    ),
-                    child: Text(
-                      'About app',
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    onPressed: () {
+                      //TODO: implement on tap
+                    },
+                    child: const Text('About app'),
                   ),
                 ],
               ),

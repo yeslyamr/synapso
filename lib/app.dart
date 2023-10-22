@@ -11,75 +11,190 @@ class MyApp extends StatelessWidget {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 796),
-      child: MaterialApp.router(
-        routerConfig: goRouter,
-        restorationScopeId: 'app',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''),
-        ],
-        onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: lightColorScheme,
-          splashFactory: NoSplash.splashFactory,
-          fontFamily: GoogleFonts.inter().fontFamily,
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.all(8),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              backgroundColor: Colors.transparent,
-              side: const BorderSide(
-                color: Color(0xFF0052DE),
-                width: 1,
+      builder: (_, child) {
+        return MaterialApp.router(
+          routerConfig: goRouter,
+          restorationScopeId: 'app',
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+          ],
+          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightColorScheme,
+            splashFactory: NoSplash.splashFactory,
+            fontFamily: GoogleFonts.inter().fontFamily,
+            primaryTextTheme: const TextTheme(
+              labelLarge: TextStyle(
+                fontSize: 18,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
               ),
-              foregroundColor: const Color(0xFF0052DE),
+              titleMedium: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            textTheme: const TextTheme(
+              labelLarge: TextStyle(
+                fontSize: 18,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+              ),
+              titleMedium: TextStyle(
+                fontSize: 16,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: const Color(0xFFF3F3F7),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 12.h,
+              ),
+              isDense: true,
+              errorStyle: const TextStyle(
+                color: Color(0xFFFF3B30),
+                fontSize: 14,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+              ),
+              hintStyle: const TextStyle(
+                color: Color(0xFF9D9D9D),
+                fontSize: 16,
+                fontFamily: 'Inter',
+                height: 1,
+                fontWeight: FontWeight.w400,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFF0052DE),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFFFF3B30),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: Color(0xFFFF3B30),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                textStyle: const TextStyle(
+                  color: Color(0xFF145FF6),
+                  fontSize: 16,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                backgroundColor: Colors.transparent,
+                foregroundColor: const Color(0xFF0052DE),
+              ),
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: EdgeInsets.all(12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                backgroundColor: Colors.transparent,
+                side: const BorderSide(
+                  color: Color(0xFF0052DE),
+                  width: 1,
+                ),
+                foregroundColor: const Color(0xFF0052DE),
+              ),
+            ),
+            appBarTheme: AppBarTheme(
+              backgroundColor: const Color(0xFFFCFCFC),
+              foregroundColor: const Color(0xFF262626),
+              iconTheme: const IconThemeData(color: Color(0xFF262626)),
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              centerTitle: true,
+              titleTextStyle: TextStyle(
+                fontSize: 20,
+                color: const Color(0xFF262626),
+                fontFamily: GoogleFonts.inter().fontFamily,
+                fontWeight: FontWeight.w400,
+              ),
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: Color(0xFFFCFCFC),
+                statusBarIconBrightness: Brightness.dark,
+              ),
+            ),
+            checkboxTheme: CheckboxThemeData(
+              fillColor: MaterialStateProperty.all(const Color(0xFF0052DE)),
+              checkColor: MaterialStateProperty.all(const Color(0xFFFFFFFF)),
+              overlayColor: MaterialStateProperty.all(const Color(0xFF0052DE)),
+              splashRadius: 0,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                backgroundColor: const Color(0xFF0052DE),
+                foregroundColor: const Color(0xFFFFFFFF),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                disabledBackgroundColor: const Color(0xFF0052DE),
+                padding: EdgeInsets.all(12.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
             ),
           ),
-          appBarTheme: AppBarTheme(
-            backgroundColor: const Color(0xFFFCFCFC),
-            foregroundColor: const Color(0xFF262626),
-            iconTheme: const IconThemeData(color: Color(0xFF262626)),
-            elevation: 0,
-            titleTextStyle: TextStyle(
-              fontSize: 20,
-              color: const Color(0xFF262626),
-              fontFamily: GoogleFonts.inter().fontFamily,
-              fontWeight: FontWeight.w400,
-            ),
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Color(0xFFFCFCFC),
-              statusBarIconBrightness: Brightness.dark,
-            ),
+          darkTheme: ThemeData(
+            colorScheme: darkColorScheme,
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0052DE),
-              foregroundColor: const Color(0xFFFFFFFF),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              disabledBackgroundColor: const Color(0xFF0052DE),
-              padding: const EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-          ),
-          textTheme: const TextTheme(),
-        ),
-        darkTheme: ThemeData(
-          colorScheme: darkColorScheme,
-        ),
-        themeMode: ThemeMode.light,
-      ),
+          themeMode: ThemeMode.light,
+        );
+      },
     );
   }
 }
@@ -94,9 +209,9 @@ const lightColorScheme = ColorScheme(
   onError: Color(0xFFFFFFFF),
   background: Color(0xFFFCFCFC),
   onBackground: Color(0xFF262626),
-  surface: Color(0xFFF3F3F7),
+  surface: Color(0xFFF3F3F8),
   onSurface: Color(0xFF262626),
-  shadow: Color(0xFF434345),
+  shadow: Color(0x42000000),
 );
 
 const darkColorScheme = ColorScheme(
