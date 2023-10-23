@@ -28,6 +28,7 @@ dependencies:
   awesome_extensions: ^2.0.9
   phone_form_field: ^8.1.0
   email_validator: ^2.1.17
+  pinput: ^3.0.1
   
   # network
   dio: ^5.3.3

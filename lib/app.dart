@@ -131,11 +131,27 @@ class MyApp extends StatelessWidget {
                 foregroundColor: const Color(0xFF0052DE),
               ),
             ),
+            bottomSheetTheme: const BottomSheetThemeData(
+              elevation: 0,
+              modalElevation: 0,
+              backgroundColor: Color(0xFFFCFCFC),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(12),
+                ),
+              ),
+            ),
             outlinedButtonTheme: OutlinedButtonThemeData(
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 padding: EdgeInsets.all(12.h),
+                textStyle: TextStyle(
+                  color: const Color(0xFF145FF6),
+                  fontSize: 18.sp,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.r),
                 ),
