@@ -1,9 +1,39 @@
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart' as router;
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:synapso/features/authentication/stores/authentication_store.dart';
 
-class LogInPage extends StatelessWidget {
+class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
+
+  @override
+  State<LogInPage> createState() => _LogInPageState();
+}
+
+class _LogInPageState extends State<LogInPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  bool isPasswordObscure = true;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordController = TextEditingController();
+    _emailController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +44,9 @@ class LogInPage extends StatelessWidget {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: router.GoRouterHelper(context).canPop()
+          leading: context.canPop()
               ? IconButton(
-                  onPressed: () => router.GoRouterHelper(context).pop(),
+                  onPressed: () => context.pop(),
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,
@@ -28,56 +58,97 @@ class LogInPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const LoginHeaderWidget(),
-                SizedBox(height: 32.h),
-                const TextField(
-                  autofocus: false,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                TextField(
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: ImageIcon(
-                        const AssetImage('assets/icons/eye.png'),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: autovalidateMode,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const LoginHeaderWidget(),
+                  TextFormField(
+                    controller: _emailController,
+                    autofocus: false,
+                    textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email address';
+                      } else if (!EmailValidator.validate(value)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(hintText: 'Email'),
+                  ).paddingOnly(bottom: 12.h, top: 32.h),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: isPasswordObscure,
+                    obscuringCharacter: '*',
+                    validator: (value) {
+                      final numericRegExp = RegExp(r'[0-9]');
+                      final specialCharRegExp =
+                          RegExp(r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+=' // <-- Notice the escaped symbols
+                              "'" // <-- ' is added to the expression
+                              ']');
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      } else if (!value.hasCapitalletter() ||
+                          !value.contains(specialCharRegExp) ||
+                          !value.contains(numericRegExp) ||
+                          value.length < 8) {
+                        return 'The password must contain: 1 capital letter, number, special character. Minimum number of characters - 8';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      errorMaxLines: 3,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(
+                            () {
+                              isPasswordObscure = !isPasswordObscure;
+                            },
+                          );
+                        },
+                        iconSize: 32.h,
                         color: const Color(0xFFBDBDBF),
-                        size: 32.w,
+                        icon: const ImageIcon(
+                          AssetImage('assets/icons/eye.png'),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 32.h),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Login'),
-                ),
-                SizedBox(height: 12.h),
-                OutlinedButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    context.push('/sign_up');
-                  },
-                  child: const Text('Registration'),
-                ),
-                SizedBox(height: 12.h),
-                TextButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-
-                    context.push('/recover_password');
-                  },
-                  child: const Text('Forgot password?'),
-                ),
-              ],
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                        GetIt.I.get<AuthenticationStore>().logIn(
+                              email: _emailController.text.toLowerCase(),
+                              password: _passwordController.text,
+                            );
+                        context.go('/');
+                      }
+                      autovalidateMode = AutovalidateMode.onUserInteraction;
+                      setState(() {});
+                    },
+                    child: const Text('Login'),
+                  ).paddingOnly(bottom: 12.h, top: 32.h),
+                  OutlinedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      context.push('/sign_up');
+                    },
+                    child: const Text('Registration'),
+                  ).paddingOnly(bottom: 12.h),
+                  TextButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      context.push('/recover_password');
+                    },
+                    child: const Text('Forgot password?'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -96,36 +167,28 @@ class LoginHeaderWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 21.h),
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            'Synapso',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF145FF6),
-              fontSize: 38.sp,
-              fontFamily: 'Hyundai Sans Head Office',
-              fontWeight: FontWeight.w500,
-            ),
+        Text(
+          'Synapso',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: const Color(0xFF145FF6),
+            fontSize: 38.sp,
+            fontFamily: 'Hyundai Sans Head Office',
+            fontWeight: FontWeight.w500,
           ),
-        ),
-        SizedBox(height: 61.h),
-        const Text(
+        ).paddingOnly(bottom: 61.h, top: 21.h).toCenter(),
+        Text(
           'Login',
           style: TextStyle(
-            color: Color(0xFF262626),
-            fontSize: 20,
+            fontSize: 20.sp,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w500,
           ),
-        ),
-        SizedBox(height: 8.h),
-        const Text(
+        ).paddingOnly(bottom: 8.h),
+        Text(
           'To take the test, log in to your account',
           style: TextStyle(
-            color: Color(0xFF262626),
-            fontSize: 18,
+            fontSize: 18.sp,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w400,
           ),

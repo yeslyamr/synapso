@@ -14,18 +14,21 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
 
   @action
   Future<void> logIn({required String email, required String password}) async {
+    GetIt.I.get<KeyValueStorageService>().setAuthToken('fake_token');
     isSignedIn = true;
     notifyListeners();
   }
 
   @action
   Future<void> signUp({required String email, required String password}) async {
+    GetIt.I.get<KeyValueStorageService>().setAuthToken('fake_token');
     isSignedIn = true;
     notifyListeners();
   }
 
   @action
   Future<void> logOut({required String email, required String password}) async {
+    GetIt.I.get<KeyValueStorageService>().resetKeys();
     isSignedIn = false;
     notifyListeners();
   }

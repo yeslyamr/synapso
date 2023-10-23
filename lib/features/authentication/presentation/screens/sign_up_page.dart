@@ -1,9 +1,9 @@
-import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart' as router;
+import 'package:go_router/go_router.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -43,9 +43,9 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: router.GoRouterHelper(context).canPop()
+          leading: context.canPop()
               ? IconButton(
-                  onPressed: () => router.GoRouterHelper(context).pop(),
+                  onPressed: () => context.pop(),
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,
@@ -56,8 +56,8 @@ class _SignUpPageState extends State<SignUpPage> {
           title: const Text('Registration'),
         ),
         body: Form(
-          autovalidateMode: autovalidateMode,
           key: _formKey,
+          autovalidateMode: autovalidateMode,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

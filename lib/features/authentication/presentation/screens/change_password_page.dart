@@ -1,7 +1,7 @@
-import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart' as router;
+import 'package:go_router/go_router.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
@@ -37,10 +37,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        // TODO: make core component for app bar
         appBar: AppBar(
-          leading: router.GoRouterHelper(context).canPop()
+          leading: context.canPop()
               ? IconButton(
-                  onPressed: () => router.GoRouterHelper(context).pop(),
+                  onPressed: () => context.pop(),
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,

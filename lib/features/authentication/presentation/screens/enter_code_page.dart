@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:awesome_extensions/awesome_extensions.dart';
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart' as router;
+import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
 class EnterCodePage extends StatefulWidget {
@@ -57,9 +57,9 @@ class _EnterCodePageState extends State<EnterCodePage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: router.GoRouterHelper(context).canPop()
+          leading: context.canPop()
               ? IconButton(
-                  onPressed: () => router.GoRouterHelper(context).pop(),
+                  onPressed: () => context.pop(),
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,
@@ -95,10 +95,10 @@ class _EnterCodePageState extends State<EnterCodePage> {
               length: 6,
               onCompleted: (value) {
                 debugPrint('Completed: $value');
-                //TODO: 
+                //TODO:
                 // send code (async) -> loading widget
                 // if success -> go to change password page
-                router.GoRouterHelper(context).push('/change_password');
+                context.push('/change_password');
                 // if fail -> show error
               },
               controller: _pinputController,

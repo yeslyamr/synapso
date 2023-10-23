@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +33,6 @@ class WelcomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 163.h),
                   Text(
                     'Synapso',
                     style: TextStyle(
@@ -41,15 +41,13 @@ class WelcomePage extends StatelessWidget {
                       fontFamily: 'Hyundai Sans Head Office',
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
-                  SizedBox(height: 36.h),
+                  ).paddingOnly(top: 163.h, bottom: 36.h),
                   ElevatedButton(
                     onPressed: () {
                       context.push('/login');
                     },
                     child: const Text('Log In'),
-                  ),
-                  SizedBox(height: 12.h),
+                  ).paddingOnly(bottom: 12.h),
                   OutlinedButton(
                     onPressed: () {
                       //TODO: implement on tap
