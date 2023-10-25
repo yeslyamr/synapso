@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:synapso/features/authentication/presentation/screens/change_password_page.dart';
+import 'package:synapso/features/authentication/presentation/screens/new_password_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/enter_code_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/log_in_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/recover_password_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/sign_up_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/welcome_page.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
+import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
+import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
+
+import '../../features/profile/presentation/screens/personal_data_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
@@ -26,7 +30,7 @@ final GoRouter goRouter = GoRouter(
         state.fullPath == '/recover_password' ||
         state.fullPath == '/welcome_page' ||
         state.fullPath == '/enter_code' ||
-        state.fullPath == '/change_password') {
+        state.fullPath == '/new_password') {
       return null;
     } else {
       return '/welcome_page';
@@ -37,27 +41,43 @@ final GoRouter goRouter = GoRouter(
       path: '/',
       redirect: (context, state) => '/home',
     ),
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) {
-        return ScaffoldWithNavBar(child: child);
+    StatefulShellRoute.indexedStack(
+      // navigatorKey: _shellNavigatorKey,
+      builder: (context, state, navigationShell) {
+        return ScaffoldWithNavBar(navigationShell: navigationShell);
       },
-      routes: [
-        GoRoute(
-          path: '/home',
-          builder: (BuildContext context, GoRouterState state) => const Scaffold(
-            body: Center(
-              child: Text('asdf'),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/home',
+              builder: (BuildContext context, GoRouterState state) => const Scaffold(
+                body: Center(
+                  child: Text('asdf'),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-        GoRoute(
-          path: '/profile',
-          builder: (BuildContext context, GoRouterState state) => const Scaffold(
-            body: Center(
-              child: Text('asdf'),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/profile',
+              builder: (BuildContext context, GoRouterState state) => const ProfilePage(),
+              routes: [
+                GoRoute(
+                  path: 'change_password',
+                  name: 'change_password',
+                  builder: (context, state) => const ChangePasswordPage(),
+                ),
+                GoRoute(
+                  path: 'personal_data',
+                  name: 'personal_data',
+                  builder: (context, state) => const PersonalDataPage(),
+                ),
+              ],
             ),
-          ),
+          ],
         ),
       ],
     ),
@@ -82,8 +102,8 @@ final GoRouter goRouter = GoRouter(
       builder: (BuildContext context, GoRouterState state) => const EnterCodePage(),
     ),
     GoRoute(
-      path: '/change_password',
-      builder: (BuildContext context, GoRouterState state) => const ChangePasswordPage(),
+      path: '/new_password',
+      builder: (BuildContext context, GoRouterState state) => const NewPasswordPage(),
     ),
   ],
 );
@@ -91,16 +111,15 @@ final GoRouter goRouter = GoRouter(
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({
     super.key,
-    required this.child,
+    required this.navigationShell,
   });
 
-  final Widget child;
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: child,
-      extendBody: true,
+      body: navigationShell,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
@@ -150,13 +169,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
   }
 
   void _onItemTapped(int index, BuildContext context) {
-    switch (index) {
-      case 0:
-        GoRouter.of(context).go('/home');
-        break;
-      case 1:
-        GoRouter.of(context).go('/profile');
-        break;
-    }
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
 }

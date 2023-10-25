@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class ChangePasswordPage extends StatefulWidget {
-  const ChangePasswordPage({Key? key}) : super(key: key);
+class NewPasswordPage extends StatefulWidget {
+  const NewPasswordPage({Key? key}) : super(key: key);
 
   @override
-  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+  State<NewPasswordPage> createState() => _NewPasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
+class _NewPasswordPageState extends State<NewPasswordPage> {
   final _formKey = GlobalKey<FormState>();
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
@@ -40,12 +40,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         // TODO: make core component for app bar
         appBar: AppBar(
           leading: IconButton(
-                  onPressed: () => context.pop(),
-                  icon: Image.asset(
-                    'assets/icons/arrow_back.png',
-                    height: 30.h,
-                    width: 30.h,
-                  ),
+            onPressed: () {
+              if (context.canPop()) context.pop();
+            },
+            icon: Image.asset(
+              'assets/icons/arrow_back.png',
+              height: 30.h,
+              width: 30.h,
+            ),
           ),
           title: const Text('Recovery'),
         ),
@@ -75,14 +77,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 ),
               ).paddingOnly(top: 26.h, bottom: 8.h),
               Text(
-                'The password must be at least 8 characters long and contain 2 digits.',
+                'The password must contain: 1 capital letter, number, special character. Minimum number of characters - 8',
                 style: TextStyle(
                   color: const Color(0xFF262626),
                   fontSize: 18.sp,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
                 ),
-              ),
+              ).paddingOnly(bottom: 24.h),
               const Text('Password*'),
               TextFormField(
                 controller: _passwordController,

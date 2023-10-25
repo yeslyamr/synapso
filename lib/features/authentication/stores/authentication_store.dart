@@ -14,30 +14,30 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
 
   @action
   Future<void> logIn({required String email, required String password}) async {
-    GetIt.I.get<KeyValueStorageService>().setAuthToken('fake_token');
+    GetIt.I.get<KeyValueStorageService>().setAccessToken('fake_token');
+    GetIt.I.get<KeyValueStorageService>().setAuthPassword(password);
     isSignedIn = true;
     notifyListeners();
   }
 
   @action
   Future<void> signUp({required String email, required String password}) async {
-    GetIt.I.get<KeyValueStorageService>().setAuthToken('fake_token');
+    GetIt.I.get<KeyValueStorageService>().setAccessToken('fake_token');
+    GetIt.I.get<KeyValueStorageService>().setAuthPassword(password);
     isSignedIn = true;
     notifyListeners();
   }
 
   @action
-  Future<void> logOut({required String email, required String password}) async {
+  Future<void> logOut() async {
     GetIt.I.get<KeyValueStorageService>().resetKeys();
     isSignedIn = false;
     notifyListeners();
   }
 
   Future<void> checkIfSignedIn() async {
-    final token = await GetIt.I.get<KeyValueStorageService>().getAuthToken();
-    if (token != null) {
-      isSignedIn = true;
-    }
+    final token = await GetIt.I.get<KeyValueStorageService>().getAccessToken();
+    isSignedIn = token != null;
     notifyListeners();
   }
 }
