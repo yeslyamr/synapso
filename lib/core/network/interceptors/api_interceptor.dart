@@ -35,8 +35,7 @@ class ApiInterceptor extends Interceptor {
   ) async {
     if (options.extra.containsKey('requiresAuthToken')) {
       if (options.extra['requiresAuthToken'] == true) {
-        // final token = await _ref.watch(keyValueStorageServiceProvider).getAuthToken();
-        final token = await GetIt.I<KeyValueStorageService>().getAuthToken();
+        final token = await GetIt.I<KeyValueStorageService>().getAccessToken();
         options.headers.addAll(
           <String, Object?>{'Authorization': 'Bearer $token'},
         );
@@ -88,5 +87,47 @@ class ApiInterceptor extends Interceptor {
         response: response,
       ),
     );
+  }
+
+  @override
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    if (err.response?.statusCode == 401) {
+      final refreshToken = await GetIt.I<KeyValueStorageService>().getRefreshToken();
+      if (refreshToken != null) {
+        await _refreshToken(refreshToken: refreshToken);
+        return handler.resolve(await retry(err.requestOptions));
+      }
+    }
+    return handler.next(err);
+  }
+
+  Future<Response<dynamic>> retry(RequestOptions requestOptions) async {
+    final options = Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+    return Dio().request<dynamic>(
+      requestOptions.path,
+      data: requestOptions.data,
+      queryParameters: requestOptions.queryParameters,
+      options: options,
+    );
+  }
+
+  Future<void> _refreshToken({required String refreshToken}) async {
+    //TODO: refresh token
+    final response = await Dio().post(
+      '',
+      data: {'refreshToken': refreshToken},
+    );
+    if (response.statusCode == 201) {
+      GetIt.I<KeyValueStorageService>().setAccessToken(response.data['accessToken']);
+      //TODO: update refreshToken?
+    } else {
+      GetIt.I<KeyValueStorageService>().resetKeys();
+    }
   }
 }
