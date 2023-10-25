@@ -57,16 +57,16 @@ class _EnterCodePageState extends State<EnterCodePage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: context.canPop()
-              ? IconButton(
-                  onPressed: () => context.pop(),
+          leading: IconButton(
+            onPressed: () {
+              if (context.canPop()) context.pop();
+            },
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,
                     width: 30.h,
                   ),
-                )
-              : null,
+          ),
           title: const Text('Recovery'),
         ),
         body: Column(

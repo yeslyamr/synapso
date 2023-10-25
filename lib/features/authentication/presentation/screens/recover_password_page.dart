@@ -24,16 +24,17 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: context.canPop()
-              ? IconButton(
-                  onPressed: () => context.pop(),
-                  icon: Image.asset(
-                    'assets/icons/arrow_back.png',
-                    height: 30.h,
-                    width: 30.h,
-                  ),
-                )
-              : null,
+          leading: IconButton(
+            onPressed: () {
+              if (context.canPop()) context.pop();
+            },
+            icon: Image.asset(
+              'assets/icons/arrow_back.png',
+              height: 30.h,
+              width: 30.h,
+            ),
+          )
+                  ,
           title: const Text('Recovery'),
         ),
         resizeToAvoidBottomInset: true,

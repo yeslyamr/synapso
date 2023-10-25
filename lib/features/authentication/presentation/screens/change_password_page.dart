@@ -39,16 +39,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: context.canPop()
-              ? IconButton(
+          leading: IconButton(
                   onPressed: () => context.pop(),
                   icon: Image.asset(
                     'assets/icons/arrow_back.png',
                     height: 30.h,
                     width: 30.h,
                   ),
-                )
-              : null,
+          ),
           title: const Text('Recovery'),
         ),
         bottomSheet: ElevatedButton(

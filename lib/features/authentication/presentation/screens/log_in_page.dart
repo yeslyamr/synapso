@@ -44,16 +44,16 @@ class _LogInPageState extends State<LogInPage> {
       child: Scaffold(
         // TODO: make core component for app bar
         appBar: AppBar(
-          leading: context.canPop()
-              ? IconButton(
-                  onPressed: () => context.pop(),
-                  icon: Image.asset(
-                    'assets/icons/arrow_back.png',
-                    height: 30.h,
-                    width: 30.h,
-                  ),
-                )
-              : null,
+          leading: IconButton(
+            onPressed: () {
+              if (context.canPop()) context.pop();
+            },
+            icon: Image.asset(
+              'assets/icons/arrow_back.png',
+              height: 30.h,
+              width: 30.h,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -120,15 +120,15 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-                        GetIt.I.get<AuthenticationStore>().logIn(
+                        await GetIt.I.get<AuthenticationStore>().logIn(
                               email: _emailController.text.toLowerCase(),
                               password: _passwordController.text,
                             );
-                        context.go('/');
+                        if (context.mounted) context.go('/home');
                       }
-                      autovalidateMode = AutovalidateMode.onUserInteraction;
+                      autovalidateMode = AutovalidateMode.always;
                       setState(() {});
                     },
                     child: const Text('Login'),
