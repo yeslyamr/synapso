@@ -65,7 +65,7 @@ class ApiService implements ApiInterface {
       );
 
       // Items of table as Map<String, dynamic>
-      body = data.body;
+      body = []; //.body;
     } on Exception catch (ex) {
       throw CustomException.fromDioException(ex);
     }
@@ -123,7 +123,7 @@ class ApiService implements ApiInterface {
         cancelToken: cancelToken,
       );
 
-      body = data.body;
+      body = data ?? {};
     } on Exception catch (ex) {
       throw CustomException.fromDioException(ex);
     }

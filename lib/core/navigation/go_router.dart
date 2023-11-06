@@ -11,6 +11,10 @@ import 'package:synapso/features/authentication/presentation/screens/welcome_pag
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
 import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
+import 'package:synapso/features/recognition_task/models/recognition_task_model.dart';
+import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_list_page.dart';
+import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_presentation_page.dart';
+import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_recall_page.dart';
 
 import '../../features/profile/presentation/screens/personal_data_page.dart';
 
@@ -51,11 +55,7 @@ final GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/home',
-              builder: (BuildContext context, GoRouterState state) => const Scaffold(
-                body: Center(
-                  child: Text('asdf'),
-                ),
-              ),
+              builder: (BuildContext context, GoRouterState state) => const RecognitionTaskList()
             ),
           ],
         ),
@@ -80,6 +80,20 @@ final GoRouter goRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/recognition_task_presentation',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (BuildContext context, GoRouterState state) => RecognitionTaskPresentationPage(
+        recognitionTaskModel: state.extra as RecognitionTaskModel,
+      ),
+    ),
+    GoRoute(
+      path: '/recognition_task_recall',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (BuildContext context, GoRouterState state) => RecognitionTaskRecallPage(
+        recognitionTaskModel: state.extra as RecognitionTaskModel,
+      ),
     ),
     GoRoute(
       path: '/welcome_page',

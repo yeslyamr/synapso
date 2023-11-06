@@ -42,7 +42,7 @@ class DioService {
     }
   }
 
-  Future<ResponseModel<R>> get<R>({
+  Future<Map<String, dynamic>?> get<R>({
     required String endpoint,
     Map<String, dynamic>? queryParams,
     Options? options,
@@ -58,7 +58,8 @@ class DioService {
       ),
       cancelToken: cancelToken ?? _cancelToken,
     );
-    return ResponseModel<R>.fromJson(response.data!);
+    return response.data;
+    // return ResponseModel<R>.fromJson(response.data!);
   }
 
   Future<ResponseModel<R>> post<R>({

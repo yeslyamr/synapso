@@ -24,7 +24,7 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
       // );
 
       GetIt.I.get<KeyValueStorageService>().setAccessToken(
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzA4MjQ5NzYsInJvbGUiOiJzdWJqZWN0IiwidXNlcl9pZCI6MTF9.30GdBmCPVWcM1QHJ7qQerdv2U6PkNyUOGW5YMP2FOME');
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzA4MjQ5NzYsInJvbGUiOiJzdWJqZWN0IiwidXNlcl9pZCI6MTF9.30GdBmCPVWcM1QHJ7qQerdv2U6PkNyUOGW5YMP2FOME');
       GetIt.I.get<KeyValueStorageService>().setAuthPassword(password);
       isSignedIn = true;
       notifyListeners();
