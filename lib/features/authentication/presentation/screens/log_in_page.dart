@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 
 class LogInPage extends StatefulWidget {
@@ -41,113 +42,121 @@ class _LogInPageState extends State<LogInPage> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: Scaffold(
-        // TODO: make core component for app bar
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              if (context.canPop()) context.pop();
-            },
-            icon: Image.asset(
-              'assets/icons/arrow_back.png',
-              height: 30.h,
-              width: 30.h,
+      child: LoaderOverlay(
+        overlayOpacity: 0.5,
+        overlayColor: Colors.grey.shade200.withOpacity(0.5),
+        overlayWidget: const CircularProgressIndicator.adaptive(),
+        child: Scaffold(
+          // TODO: make core component for app bar
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                if (context.canPop()) context.pop();
+              },
+              icon: Image.asset(
+                'assets/icons/arrow_back.png',
+                height: 30.h,
+                width: 30.h,
+              ),
             ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Form(
-              key: _formKey,
-              autovalidateMode: autovalidateMode,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const LoginHeaderWidget(),
-                  TextFormField(
-                    controller: _emailController,
-                    autofocus: false,
-                    textInputAction: TextInputAction.next,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email address';
-                      } else if (!EmailValidator.validate(value)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(hintText: 'Email'),
-                  ).paddingOnly(bottom: 12.h, top: 32.h),
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: isPasswordObscure,
-                    obscuringCharacter: '*',
-                    validator: (value) {
-                      final numericRegExp = RegExp(r'[0-9]');
-                      final specialCharRegExp =
-                          RegExp(r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+=' // <-- Notice the escaped symbols
-                              "'" // <-- ' is added to the expression
-                              ']');
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      } else if (!value.hasCapitalletter() ||
-                          !value.contains(specialCharRegExp) ||
-                          !value.contains(numericRegExp) ||
-                          value.length < 8) {
-                        return 'The password must contain: 1 capital letter, number, special character. Minimum number of characters - 8';
-                      } else {
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Form(
+                key: _formKey,
+                autovalidateMode: autovalidateMode,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LoginHeaderWidget(),
+                    TextFormField(
+                      controller: _emailController,
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email address';
+                        } else if (!EmailValidator.validate(value)) {
+                          return 'Please enter a valid email address';
+                        }
                         return null;
-                      }
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      errorMaxLines: 3,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(
-                            () {
-                              isPasswordObscure = !isPasswordObscure;
-                            },
-                          );
-                        },
-                        iconSize: 32.h,
-                        color: const Color(0xFFBDBDBF),
-                        icon: const ImageIcon(
-                          AssetImage('assets/icons/eye.png'),
+                      },
+                      decoration: const InputDecoration(hintText: 'Email'),
+                    ).paddingOnly(bottom: 12.h, top: 32.h),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: isPasswordObscure,
+                      obscuringCharacter: '*',
+                      validator: (value) {
+                        final numericRegExp = RegExp(r'[0-9]');
+                        final specialCharRegExp =
+                            RegExp(r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+=' // <-- Notice the escaped symbols
+                                "'" // <-- ' is added to the expression
+                                ']');
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        } else if (!value.hasCapitalletter() ||
+                            !value.contains(specialCharRegExp) ||
+                            !value.contains(numericRegExp) ||
+                            value.length < 8) {
+                          return 'The password must contain: 1 capital letter, number, special character. Minimum number of characters - 8';
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        errorMaxLines: 3,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(
+                              () {
+                                isPasswordObscure = !isPasswordObscure;
+                              },
+                            );
+                          },
+                          iconSize: 32.h,
+                          color: const Color(0xFFBDBDBF),
+                          icon: const ImageIcon(
+                            AssetImage('assets/icons/eye.png'),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-                        await GetIt.I.get<AuthenticationStore>().logIn(
-                              email: _emailController.text.toLowerCase(),
-                              password: _passwordController.text,
-                            );
-                        if (context.mounted) context.go('/home');
-                      }
-                      autovalidateMode = AutovalidateMode.always;
-                      setState(() {});
-                    },
-                    child: const Text('Login'),
-                  ).paddingOnly(bottom: 12.h, top: 32.h),
-                  OutlinedButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context.push('/sign_up');
-                    },
-                    child: const Text('Registration'),
-                  ).paddingOnly(bottom: 12.h),
-                  TextButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context.push('/recover_password');
-                    },
-                    child: const Text('Forgot password?'),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                          context.loaderOverlay.show();
+                          await GetIt.I.get<AuthenticationStore>().logIn(
+                                email: _emailController.text.toLowerCase(),
+                                password: _passwordController.text,
+                              );
+                          if (context.mounted) context.loaderOverlay.hide();
+
+                          if (context.mounted) context.go('/home');
+                        }
+                        autovalidateMode = AutovalidateMode.always;
+                        setState(() {});
+                      },
+                      child: const Text('Login'),
+                    ).paddingOnly(bottom: 12.h, top: 32.h),
+                    OutlinedButton(
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        context.push('/sign_up');
+                      },
+                      child: const Text('Registration'),
+                    ).paddingOnly(bottom: 12.h),
+                    TextButton(
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        context.push('/recover_password');
+                      },
+                      child: const Text('Forgot password?'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
