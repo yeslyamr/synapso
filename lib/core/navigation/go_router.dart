@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -11,6 +12,9 @@ import 'package:synapso/features/authentication/presentation/screens/welcome_pag
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
 import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
+import 'package:synapso/features/recall_task/models/recall_task_model.dart';
+import 'package:synapso/features/recall_task/presentation/screens/recall_task_presentation_page.dart';
+import 'package:synapso/features/recall_task/presentation/screens/recall_task_recall_page.dart';
 
 import '../../features/profile/presentation/screens/personal_data_page.dart';
 
@@ -51,9 +55,142 @@ final GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/home',
-              builder: (BuildContext context, GoRouterState state) => const Scaffold(
-                body: Center(
-                  child: Text('asdf'),
+              builder: (BuildContext context, GoRouterState state) => SafeArea(
+                child: Scaffold(
+                  body: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _rootNavigatorKey.currentContext?.push(
+                            '/recall_task_presentation',
+                            extra: const RecallTaskModel(
+                              stimulus: Stimulus(
+                                type: 'words',
+                                stimuli: [
+                                  StimulusElement(data: 'duck', delay: 1000, cue: 'donald'),
+                                  StimulusElement(data: 'zebra', delay: 1000, cue: 'madagaskar'),
+                                  StimulusElement(data: 'panda', delay: 1000, cue: 'kung fu'),
+                                  StimulusElement(data: 'silverback', delay: 200, cue: 'joe rogan'),
+                                  StimulusElement(data: 'horse', delay: 1000, cue: 'kazakhstan'),
+                                  StimulusElement(data: 'cat', delay: 1000, cue: 'garfield'),
+                                  StimulusElement(data: 'mouse', delay: 1000, cue: 'mickey'),
+                                  StimulusElement(data: 'ant', delay: 1000, cue: 'marvel'),
+                                  StimulusElement(data: 'pigeon', delay: 3000, cue: 'new york'),
+                                ],
+                              ),
+                              isSequenceMatter: true,
+                              isFreeRecall: false,
+                            ),
+                          );
+                        },
+                        child: const Text('with cues and NOT free recall'),
+                      ).paddingSymmetric(horizontal: 16.w, vertical: 8.h),
+                      ElevatedButton(
+                        onPressed: () {
+                          _rootNavigatorKey.currentContext?.push(
+                            '/recall_task_presentation',
+                            extra: const RecallTaskModel(
+                              stimulus: Stimulus(
+                                type: 'words',
+                                stimuli: [
+                                  StimulusElement(data: 'duck', delay: 500, cue: 'donald'),
+                                  StimulusElement(data: 'zebra', delay: 500, cue: 'madagaskar'),
+                                  StimulusElement(data: 'panda', delay: 500, cue: 'kung fu'),
+                                  // StimulusElement(data: 'silverback', delay: 200, cue: 'joe rogan'),
+                                  // StimulusElement(data: 'horse', delay: 1000, cue: 'kazakhstan'),
+                                  // StimulusElement(data: 'cat', delay: 1000, cue: 'garfield'),
+                                  // StimulusElement(data: 'mouse', delay: 1000, cue: 'mickey'),
+                                  // StimulusElement(data: 'ant', delay: 1000, cue: 'marvel'),
+                                  // StimulusElement(data: 'pigeon', delay: 3000, cue: 'new york'),
+                                ],
+                              ),
+                              isSequenceMatter: true,
+                              isFreeRecall: true,
+                            ),
+                          );
+                        },
+                        child: const Text('recall task: with cues and free recall'),
+                      ).paddingSymmetric(horizontal: 16.w, vertical: 8.h),
+                      ElevatedButton(
+                        onPressed: () {
+                          _rootNavigatorKey.currentContext?.push(
+                            '/recall_task_presentation',
+                            extra: const RecallTaskModel(
+                              stimulus: Stimulus(
+                                type: 'words',
+                                stimuli: [
+                                  StimulusElement(data: 'duck', delay: 500, cue: null),
+                                  StimulusElement(data: 'zebra', delay: 500, cue: null),
+                                  StimulusElement(data: 'panda', delay: 500, cue: null),
+                                  // StimulusElement(data: 'silverback', delay: 200, cue: null),
+                                  // StimulusElement(data: 'horse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'cat', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'mouse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'ant', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'pigeon', delay: 3000, cue: null),
+                                ],
+                              ),
+                              isSequenceMatter: false,
+                              isFreeRecall: true,
+                            ),
+                          );
+                        },
+                        child: const Text('without cues and free recall and sequence does NOT matter'),
+                      ).paddingSymmetric(horizontal: 16.w, vertical: 8.h),
+                      ElevatedButton(
+                        onPressed: () {
+                          _rootNavigatorKey.currentContext?.push(
+                            '/recall_task_presentation',
+                            extra: const RecallTaskModel(
+                              stimulus: Stimulus(
+                                type: 'words',
+                                stimuli: [
+                                  StimulusElement(data: 'duck', delay: 500, cue: null),
+                                  StimulusElement(data: 'zebra', delay: 500, cue: null),
+                                  StimulusElement(data: 'panda', delay: 500, cue: null),
+                                  // StimulusElement(data: 'silverback', delay: 200, cue: null),
+                                  // StimulusElement(data: 'horse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'cat', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'mouse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'ant', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'pigeon', delay: 3000, cue: null),
+                                ],
+                              ),
+                              isSequenceMatter: true,
+                              isFreeRecall: true,
+                            ),
+                          );
+                        },
+                        child: const Text('without cues and free recall and sequence matter'),
+                      ).paddingSymmetric(horizontal: 16.w, vertical: 8.h),
+                      ElevatedButton(
+                        onPressed: () {
+                          _rootNavigatorKey.currentContext?.push(
+                            '/recall_task_presentation',
+                            extra: const RecallTaskModel(
+                              stimulus: Stimulus(
+                                type: 'words',
+                                stimuli: [
+                                  StimulusElement(data: 'duck', delay: 500, cue: null),
+                                  StimulusElement(data: 'zebra', delay: 500, cue: null),
+                                  StimulusElement(data: 'panda', delay: 500, cue: null),
+                                  // StimulusElement(data: 'silverback', delay: 200, cue: null),
+                                  // StimulusElement(data: 'horse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'cat', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'mouse', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'ant', delay: 1000, cue: null),
+                                  // StimulusElement(data: 'pigeon', delay: 3000, cue: null),
+                                ],
+                              ),
+                              isSequenceMatter: true,
+                              isFreeRecall: false,
+                            ),
+                          );
+                        },
+                        child: const Text('without cues and NOT free recall and sequence matter'),
+                      ).paddingSymmetric(horizontal: 16.w, vertical: 8.h),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -80,6 +217,20 @@ final GoRouter goRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/recall_task_presentation',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => RecallTaskPresentationPage(
+        model: state.extra as RecallTaskModel,
+      ),
+    ),
+    GoRoute(
+      path: '/recall_task_recall',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => RecallTaskRecallPage(
+        model: state.extra as RecallTaskModel,
+      ),
     ),
     GoRoute(
       path: '/welcome_page',
