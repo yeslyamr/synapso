@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:synapso/core/utils/key_value_storage_service.dart';
+import 'package:synapso/features/authentication/models/user_model.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,6 +15,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final UserModel? userModel = GetIt.I<KeyValueStorageService>().getUserModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           //TODO: get real user data
           Text(
-            'Anel Salimova',
+            '${userModel?.name ?? ''} ${userModel?.surname ?? ''}',
             style: TextStyle(
               fontSize: 20.sp,
               fontFamily: 'Inter',
@@ -34,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ).paddingOnly(top: 24.h, bottom: 8.h).toCenter(),
           //TODO: get real user data
           Text(
-            'email@gmail.com',
+            userModel?.email ?? '',
             style: TextStyle(
               fontSize: 18.sp,
               fontFamily: 'Inter',

@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:synapso/core/network/api_endpoints.dart';
 import 'package:synapso/core/network/api_service.dart';
 import 'package:synapso/core/network/dio_service.dart';
 import 'package:synapso/core/network/interceptors/api_interceptor.dart';
-import 'package:synapso/core/network/interceptors/logging_interceptor.dart';
 import 'package:synapso/core/utils/key_value_storage_base.dart';
 import 'package:synapso/core/utils/key_value_storage_service.dart';
 
@@ -32,7 +30,6 @@ final cacheOptions = CacheOptions(
     interceptors: [
       ApiInterceptor(),
       DioCacheInterceptor(options: cacheOptions),
-      if (kDebugMode) LoggingInterceptor(),
     ],
   );
 

@@ -29,7 +29,7 @@ mixin _$AuthenticationStore on _AuthenticationStoreBase, Store {
       AsyncAction('_AuthenticationStoreBase.logIn', context: context);
 
   @override
-  Future<void> logIn({required String email, required String password}) {
+  Future<UserModel?> logIn({required String email, required String password}) {
     return _$logInAsyncAction
         .run(() => super.logIn(email: email, password: password));
   }
@@ -38,9 +38,22 @@ mixin _$AuthenticationStore on _AuthenticationStoreBase, Store {
       AsyncAction('_AuthenticationStoreBase.signUp', context: context);
 
   @override
-  Future<void> signUp({required String email, required String password}) {
-    return _$signUpAsyncAction
-        .run(() => super.signUp(email: email, password: password));
+  Future<UserModel?> signUp(
+      {required String name,
+      required String surname,
+      required String mobileNumber,
+      required String gender,
+      required String dateOfBirth,
+      required String email,
+      required String password}) {
+    return _$signUpAsyncAction.run(() => super.signUp(
+        name: name,
+        surname: surname,
+        mobileNumber: mobileNumber,
+        gender: gender,
+        dateOfBirth: dateOfBirth,
+        email: email,
+        password: password));
   }
 
   late final _$logOutAsyncAction =

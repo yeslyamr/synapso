@@ -18,27 +18,25 @@ class ApiEndpoint {
   /// ```
   /// flutter run --dart-define=BASE_URL=www.some_url.com
   /// ```
-  //TODO: change base url
-  static const baseUrl = 'https://baseurl.com/v1/';
+  static const baseUrl = 'https://synapso-19c916bc2798.herokuapp.com/api';
 
   /// Returns the path for an authentication [endpoint].
   static String auth(AuthEndpoint endpoint) {
-    const path = '/auth';
     switch (endpoint) {
       case AuthEndpoint.REGISTER:
-        return '$path/register';
+        return '/sign-up';
       case AuthEndpoint.LOGIN:
-        return '$path/login';
+        return '/login';
       case AuthEndpoint.REFRESH_TOKEN:
-        return '$path/refresh-token';
+        return '/refresh-token';
       case AuthEndpoint.CHANGE_PASSWORD:
-        return '$path/change-password';
+        return '/change-password';
       case AuthEndpoint.FORGOT_PW_SEND_OTP:
-        return '$path/forgot/send-otp';
+        return '/forgot/send-otp';
       case AuthEndpoint.FORGOT_PW_VERIFY_OTP:
-        return '$path/forgot/verify-otp';
+        return '/forgot/verify-otp';
       case AuthEndpoint.FORGOT_PW_RESET_PASSWORD:
-        return '$path/forgot/reset-password';
+        return '/forgot/reset-password';
     }
   }
 
