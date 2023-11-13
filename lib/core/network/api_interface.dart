@@ -13,26 +13,6 @@ abstract class ApiInterface {
   /// const expressions.
   const ApiInterface();
 
-  /// Base method for requesting collection of data from the [endpoint].
-  ///
-  /// The response is **deserialized** into a List of model objects of type [T],
-  /// using the [parser] callback.
-  ///
-  /// [queryParams] holds any query parameters for the request.
-  ///
-  /// [cancelToken] is used to cancel the request pre-maturely. If null,
-  /// the **default** [cancelToken] inside [DioService] is used.
-  ///
-  /// [requiresAuthToken] is used to decide if a token will be inserted
-  /// in the **headers** of the request using an [ApiInterceptor].
-  Future<List<T>> getCollectionData<T>({
-    required String endpoint,
-    Map<String, dynamic>? queryParams,
-    CancelToken? cancelToken,
-    bool requiresAuthToken = true,
-    required T Function(Map<String, dynamic> responseBody) parser,
-  });
-
   /// Base method for requesting a document of data from the [endpoint].
   ///
   /// The response is deserialized into a single model objects of type [T],
@@ -53,9 +33,9 @@ abstract class ApiInterface {
     required T Function(Map<String, dynamic> responseBody) parser,
   });
 
-  /// Base method for inserting [data] at the [endpoint].
+  /// Base method for inserting [body] at the [endpoint].
   ///
-  /// The [data] contains body for the request.
+  /// The [body] contains body for the request.
   ///
   /// The response is deserialized into an object of type [T],
   /// using the [parser] callback.
@@ -67,10 +47,10 @@ abstract class ApiInterface {
   /// in the **headers** of the request using an [ApiInterceptor]
   Future<T> postData<T>({
     required String endpoint,
-    required Map<String, dynamic> data,
+    required Map<String, dynamic> body,
     CancelToken? cancelToken,
     bool requiresAuthToken = true,
-    required T Function(ResponseModel<Map<String, dynamic>> response) parser,
+    required T Function(Map<String, dynamic> response) parser,
   });
 
   /// Base method for updating [data] at the [endpoint].

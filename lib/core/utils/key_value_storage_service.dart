@@ -1,16 +1,19 @@
+import 'dart:convert';
+
+import 'package:synapso/features/authentication/models/user_model.dart';
+
 import 'key_value_storage_base.dart';
 
 /// A service class for providing methods to store and retrieve key-value data
 /// from common or secure storage.
 class KeyValueStorageService {
-
   static const _accessTokenKey = 'accessToken';
   static const _refreshTokenKey = 'refreshToken';
   static const _authPasswordKey = 'authPasswordKey';
+  static const _userModelKey = 'userModel';
 
   final _keyValueStorage = KeyValueStorageBase();
 
- 
   Future<String?> getAccessToken() async {
     return await _keyValueStorage.getEncrypted(_accessTokenKey);
   }
@@ -21,6 +24,15 @@ class KeyValueStorageService {
 
   Future<String?> getAuthPassword() async {
     return await _keyValueStorage.getEncrypted(_authPasswordKey);
+  }
+
+  UserModel? getUserModel() {
+    final json = _keyValueStorage.getCommon(_userModelKey);
+    if (json != null) {
+      return UserModel.fromJson(jsonDecode(json));
+    } else {
+      return null;
+    }
   }
 
   void setAccessToken(String token) {
@@ -35,9 +47,10 @@ class KeyValueStorageService {
     _keyValueStorage.setEncrypted(_authPasswordKey, password);
   }
 
-  /// Resets the authentication. Even though these methods are asynchronous, we
-  /// don't care about their completion which is why we don't use `await` and
-  /// let them execute in the background.
+  void setUserModel(UserModel userModel) {
+    _keyValueStorage.setCommon(_userModelKey, jsonEncode(userModel.toJson()));
+  }
+
   void resetKeys() {
     _keyValueStorage
       ..clearCommon()
