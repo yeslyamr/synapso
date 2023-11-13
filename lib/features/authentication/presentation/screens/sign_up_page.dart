@@ -330,26 +330,34 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if (_formKey.currentState != null &&
                           _formKey.currentState!.validate() &&
                           agreeTerms &&
                           _phoneNumberController.value != null) {
                         context.loaderOverlay.show();
-
-                        try {
-                          await GetIt.I<AuthenticationStore>().signUp(
-                            name: _nameController.text,
-                            surname: _surnameController.text,
-                            mobileNumber:
-                                '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
-                            gender: gender,
-                            dateOfBirth: _dateOfBirthController.text,
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
-                          if (context.mounted) context.pop();
-                        } catch (e) {}
+                        final userModel = await GetIt.I<AuthenticationStore>().signUp(
+                          name: _nameController.text,
+                          surname: _surnameController.text,
+                          mobileNumber:
+                              '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
+                          gender: gender,
+                          dateOfBirth: _dateOfBirthController.text,
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
                         if (context.mounted) context.loaderOverlay.hide();
+                        if (userModel != null && context.mounted) {
+                          context.pop();
+                          return;
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Sign up failed'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       } else if (!agreeTerms) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

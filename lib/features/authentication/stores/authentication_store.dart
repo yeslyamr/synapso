@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:synapso/core/utils/key_value_storage_service.dart';
+import 'package:synapso/features/authentication/models/user_model.dart';
 import 'package:synapso/features/authentication/repository/authentication_repository.dart';
 
 part 'authentication_store.g.dart';
@@ -16,23 +17,25 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
   bool isSignedIn = false;
 
   @action
-  Future<void> logIn({required String email, required String password}) async {
+  Future<UserModel?> logIn({required String email, required String password}) async {
     try {
-      // await _authenticationRepository.logInWithEmail(
-      //   email: email,
-      //   password: password,
-      // );
+      final UserModel userModel = await _authenticationRepository.logInWithEmail(
+        email: email,
+        password: password,
+      );
 
-      GetIt.I.get<KeyValueStorageService>().setAccessToken(
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzA4MjQ5NzYsInJvbGUiOiJzdWJqZWN0IiwidXNlcl9pZCI6MTF9.30GdBmCPVWcM1QHJ7qQerdv2U6PkNyUOGW5YMP2FOME');
-      GetIt.I.get<KeyValueStorageService>().setAuthPassword(password);
+      GetIt.I.get<KeyValueStorageService>().setUserModel(userModel);
+
       isSignedIn = true;
       notifyListeners();
-    } catch (e) {}
+      return userModel;
+    } catch (e) {
+      return null;
+    }
   }
 
   @action
-  Future<void> signUp({
+  Future<UserModel?> signUp({
     required String name,
     required String surname,
     required String mobileNumber,
@@ -42,7 +45,7 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
     required String password,
   }) async {
     try {
-      await _authenticationRepository.signUp(
+      final UserModel userModel = await _authenticationRepository.signUp(
         name: name,
         surname: surname,
         mobileNumber: mobileNumber,
@@ -51,8 +54,12 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
         email: email,
         password: password,
       );
-      notifyListeners();  
-    } catch (e) {}
+
+      GetIt.I.get<KeyValueStorageService>().setUserModel(userModel);
+      return userModel;
+    } catch (e) {
+      return null;
+    }
   }
 
   @action

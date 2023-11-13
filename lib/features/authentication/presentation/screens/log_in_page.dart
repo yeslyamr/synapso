@@ -126,15 +126,25 @@ class _LogInPageState extends State<LogInPage> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
+                        FocusManager.instance.primaryFocus?.unfocus();
                         if (_formKey.currentState != null && _formKey.currentState!.validate()) {
                           context.loaderOverlay.show();
-                          await GetIt.I.get<AuthenticationStore>().logIn(
+                          final userModel = await GetIt.I.get<AuthenticationStore>().logIn(
                                 email: _emailController.text.toLowerCase(),
                                 password: _passwordController.text,
                               );
                           if (context.mounted) context.loaderOverlay.hide();
 
-                          if (context.mounted) context.go('/home');
+                          if (userModel != null && context.mounted) {
+                            context.go('/home');
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Incorrect email or password'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
                         }
                         autovalidateMode = AutovalidateMode.always;
                         setState(() {});

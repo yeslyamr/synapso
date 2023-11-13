@@ -1,23 +1,26 @@
 import 'package:get_it/get_it.dart';
 import 'package:synapso/core/network/api_endpoints.dart';
 import 'package:synapso/core/network/api_service.dart';
+import 'package:synapso/features/authentication/models/user_model.dart';
 
 class AuthenticationRepository {
   final ApiService _apiService = GetIt.I<ApiService>();
 
-  Future<void> logInWithEmail({
+  Future<UserModel> logInWithEmail({
     required String email,
     required String password,
   }) async {
     try {
-      await _apiService.postData(
+      return await _apiService.postData<UserModel>(
         endpoint: ApiEndpoint.auth(AuthEndpoint.LOGIN),
-        data: {
+        body: {
           "email": email,
           "password": password,
           "role": "subject",
         },
-        parser: (_) {},
+        parser: (json) {
+          return UserModel.fromJson(json);
+        },
         requiresAuthToken: false,
       );
     } catch (e) {
@@ -25,7 +28,7 @@ class AuthenticationRepository {
     }
   }
 
-  Future<void> signUp({
+  Future<UserModel> signUp({
     required String name,
     required String surname,
     required String mobileNumber,
@@ -35,9 +38,9 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      await _apiService.postData(
+      return await _apiService.postData<UserModel>(
         endpoint: ApiEndpoint.auth(AuthEndpoint.REGISTER),
-        data: {
+        body: {
           "name": name,
           "surname": surname,
           "email": email,
@@ -47,7 +50,9 @@ class AuthenticationRepository {
           "date_of_birth": dateOfBirth,
           "role": "subject"
         },
-        parser: (_) {},
+        parser: (json) {
+          return UserModel.fromJson(json);
+        },
         requiresAuthToken: false,
       );
     } catch (e) {
