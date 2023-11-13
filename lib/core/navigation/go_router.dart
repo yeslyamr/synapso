@@ -1,3 +1,4 @@
+import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -11,10 +12,14 @@ import 'package:synapso/features/authentication/presentation/screens/welcome_pag
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
 import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
+import 'package:synapso/features/recall_task/models/recall_task_model.dart';
+import 'package:synapso/features/recall_task/presentation/screens/recall_task_presentation_page.dart';
+import 'package:synapso/features/recall_task/presentation/screens/recall_task_recall_page.dart';
 import 'package:synapso/features/recognition_task/models/recognition_task_model.dart';
 import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_list_page.dart';
 import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_presentation_page.dart';
 import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_recall_page.dart';
+
 
 import '../../features/profile/presentation/screens/personal_data_page.dart';
 
@@ -80,6 +85,20 @@ final GoRouter goRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/recall_task_presentation',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => RecallTaskPresentationPage(
+        model: state.extra as RecallTaskModel,
+      ),
+    ),
+    GoRoute(
+      path: '/recall_task_recall',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => RecallTaskRecallPage(
+        model: state.extra as RecallTaskModel,
+      ),
     ),
     GoRoute(
       path: '/recognition_task_presentation',
