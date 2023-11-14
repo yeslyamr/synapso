@@ -1,0 +1,16 @@
+{
+    "editor.minimap.autohide": false,
+    "explorer.autoReveal": "focusNoScroll",
+    "files.exclude": {
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
+    },
+    "explorer.autoRevealExclude": {
+        ".dart_tool": true,
+        ".idea": true,
+        ".vscode": true,
+        "android": true,
+        "build": true,
+        "ios": true
+    }
+}
