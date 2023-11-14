@@ -42,7 +42,7 @@ class DioService {
     }
   }
 
-  Future<Response> get({
+  Future<Response<Map<String, dynamic>>> get({
     required String endpoint,
     Map<String, dynamic>? queryParams,
     Options? options,

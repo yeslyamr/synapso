@@ -27,7 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //TODO: get real user data
           Text(
             '${userModel?.name ?? ''} ${userModel?.surname ?? ''}',
             style: TextStyle(
@@ -36,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
               fontWeight: FontWeight.w500,
             ),
           ).paddingOnly(top: 24.h, bottom: 8.h).toCenter(),
-          //TODO: get real user data
           Text(
             userModel?.email ?? '',
             style: TextStyle(

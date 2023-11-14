@@ -20,6 +20,7 @@ RecallTaskModel _$RecallTaskModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RecallTaskModel {
+  int get id => throw _privateConstructorUsedError;
   Stimulus get stimulus => throw _privateConstructorUsedError;
   bool get isSequenceMatter => throw _privateConstructorUsedError;
   bool get isFreeRecall => throw _privateConstructorUsedError;
@@ -36,7 +37,8 @@ abstract class $RecallTaskModelCopyWith<$Res> {
           RecallTaskModel value, $Res Function(RecallTaskModel) then) =
       _$RecallTaskModelCopyWithImpl<$Res, RecallTaskModel>;
   @useResult
-  $Res call({Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
+  $Res call(
+      {int id, Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
 
   $StimulusCopyWith<$Res> get stimulus;
 }
@@ -54,11 +56,16 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? stimulus = null,
     Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       stimulus: null == stimulus
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
@@ -91,7 +98,8 @@ abstract class _$$RecallTaskModelImplCopyWith<$Res>
       __$$RecallTaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
+  $Res call(
+      {int id, Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
 
   @override
   $StimulusCopyWith<$Res> get stimulus;
@@ -108,11 +116,16 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? stimulus = null,
     Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
   }) {
     return _then(_$RecallTaskModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       stimulus: null == stimulus
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
@@ -133,13 +146,16 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RecallTaskModelImpl implements _RecallTaskModel {
   const _$RecallTaskModelImpl(
-      {required this.stimulus,
+      {required this.id,
+      required this.stimulus,
       required this.isSequenceMatter,
       required this.isFreeRecall});
 
   factory _$RecallTaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecallTaskModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final Stimulus stimulus;
   @override
@@ -149,7 +165,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
 
   @override
   String toString() {
-    return 'RecallTaskModel(stimulus: $stimulus, isSequenceMatter: $isSequenceMatter, isFreeRecall: $isFreeRecall)';
+    return 'RecallTaskModel(id: $id, stimulus: $stimulus, isSequenceMatter: $isSequenceMatter, isFreeRecall: $isFreeRecall)';
   }
 
   @override
@@ -157,6 +173,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecallTaskModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.stimulus, stimulus) ||
                 other.stimulus == stimulus) &&
             (identical(other.isSequenceMatter, isSequenceMatter) ||
@@ -168,7 +185,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, stimulus, isSequenceMatter, isFreeRecall);
+      Object.hash(runtimeType, id, stimulus, isSequenceMatter, isFreeRecall);
 
   @JsonKey(ignore: true)
   @override
@@ -187,13 +204,16 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
 
 abstract class _RecallTaskModel implements RecallTaskModel {
   const factory _RecallTaskModel(
-      {required final Stimulus stimulus,
+      {required final int id,
+      required final Stimulus stimulus,
       required final bool isSequenceMatter,
       required final bool isFreeRecall}) = _$RecallTaskModelImpl;
 
   factory _RecallTaskModel.fromJson(Map<String, dynamic> json) =
       _$RecallTaskModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   Stimulus get stimulus;
   @override
@@ -377,6 +397,8 @@ StimulusElement _$StimulusElementFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$StimulusElement {
+  int get id => throw _privateConstructorUsedError;
+  int get recallId => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
   int get delay => throw _privateConstructorUsedError;
   String? get cue => throw _privateConstructorUsedError;
@@ -393,7 +415,7 @@ abstract class $StimulusElementCopyWith<$Res> {
           StimulusElement value, $Res Function(StimulusElement) then) =
       _$StimulusElementCopyWithImpl<$Res, StimulusElement>;
   @useResult
-  $Res call({String data, int delay, String? cue});
+  $Res call({int id, int recallId, String data, int delay, String? cue});
 }
 
 /// @nodoc
@@ -409,11 +431,21 @@ class _$StimulusElementCopyWithImpl<$Res, $Val extends StimulusElement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? recallId = null,
     Object? data = null,
     Object? delay = null,
     Object? cue = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      recallId: null == recallId
+          ? _value.recallId
+          : recallId // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -438,7 +470,7 @@ abstract class _$$StimulusElementImplCopyWith<$Res>
       __$$StimulusElementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String data, int delay, String? cue});
+  $Res call({int id, int recallId, String data, int delay, String? cue});
 }
 
 /// @nodoc
@@ -452,11 +484,21 @@ class __$$StimulusElementImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? recallId = null,
     Object? data = null,
     Object? delay = null,
     Object? cue = freezed,
   }) {
     return _then(_$StimulusElementImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      recallId: null == recallId
+          ? _value.recallId
+          : recallId // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -477,11 +519,19 @@ class __$$StimulusElementImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$StimulusElementImpl implements _StimulusElement {
   const _$StimulusElementImpl(
-      {required this.data, required this.delay, required this.cue});
+      {required this.id,
+      required this.recallId,
+      required this.data,
+      required this.delay,
+      required this.cue});
 
   factory _$StimulusElementImpl.fromJson(Map<String, dynamic> json) =>
       _$$StimulusElementImplFromJson(json);
 
+  @override
+  final int id;
+  @override
+  final int recallId;
   @override
   final String data;
   @override
@@ -491,7 +541,7 @@ class _$StimulusElementImpl implements _StimulusElement {
 
   @override
   String toString() {
-    return 'StimulusElement(data: $data, delay: $delay, cue: $cue)';
+    return 'StimulusElement(id: $id, recallId: $recallId, data: $data, delay: $delay, cue: $cue)';
   }
 
   @override
@@ -499,6 +549,9 @@ class _$StimulusElementImpl implements _StimulusElement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StimulusElementImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.recallId, recallId) ||
+                other.recallId == recallId) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.delay, delay) || other.delay == delay) &&
             (identical(other.cue, cue) || other.cue == cue));
@@ -506,7 +559,7 @@ class _$StimulusElementImpl implements _StimulusElement {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, data, delay, cue);
+  int get hashCode => Object.hash(runtimeType, id, recallId, data, delay, cue);
 
   @JsonKey(ignore: true)
   @override
@@ -525,13 +578,19 @@ class _$StimulusElementImpl implements _StimulusElement {
 
 abstract class _StimulusElement implements StimulusElement {
   const factory _StimulusElement(
-      {required final String data,
+      {required final int id,
+      required final int recallId,
+      required final String data,
       required final int delay,
       required final String? cue}) = _$StimulusElementImpl;
 
   factory _StimulusElement.fromJson(Map<String, dynamic> json) =
       _$StimulusElementImpl.fromJson;
 
+  @override
+  int get id;
+  @override
+  int get recallId;
   @override
   String get data;
   @override

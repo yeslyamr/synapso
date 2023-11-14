@@ -6,6 +6,7 @@ part 'recall_task_model.g.dart';
 @freezed
 class RecallTaskModel with _$RecallTaskModel {
   const factory RecallTaskModel({
+    required int id,
     required Stimulus stimulus,
     required bool isSequenceMatter,
     required bool isFreeRecall,
@@ -27,6 +28,8 @@ class Stimulus with _$Stimulus {
 @freezed
 class StimulusElement with _$StimulusElement {
   const factory StimulusElement({
+    required int id,
+    required int recallId,
     required String data,
     required int delay,
     required String? cue,

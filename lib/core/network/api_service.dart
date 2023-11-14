@@ -40,7 +40,13 @@ class ApiService implements ApiInterface {
         cancelToken: cancelToken,
       );
 
-      data = response.data;
+      if (response.data != null) {
+        data = response.data!;
+      } else {
+        throw CustomException.fromDioException(
+          Exception('Response data is null'),
+        );
+      }
     } on Exception catch (ex) {
       throw CustomException.fromDioException(ex);
     }

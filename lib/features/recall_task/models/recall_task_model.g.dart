@@ -9,6 +9,7 @@ part of 'recall_task_model.dart';
 _$RecallTaskModelImpl _$$RecallTaskModelImplFromJson(
         Map<String, dynamic> json) =>
     _$RecallTaskModelImpl(
+      id: json['id'] as int,
       stimulus: Stimulus.fromJson(json['stimulus'] as Map<String, dynamic>),
       isSequenceMatter: json['isSequenceMatter'] as bool,
       isFreeRecall: json['isFreeRecall'] as bool,
@@ -17,6 +18,7 @@ _$RecallTaskModelImpl _$$RecallTaskModelImplFromJson(
 Map<String, dynamic> _$$RecallTaskModelImplToJson(
         _$RecallTaskModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'stimulus': instance.stimulus,
       'isSequenceMatter': instance.isSequenceMatter,
       'isFreeRecall': instance.isFreeRecall,
@@ -41,6 +43,8 @@ Map<String, dynamic> _$$RecallTaskModelStimulusImplToJson(
 _$StimulusElementImpl _$$StimulusElementImplFromJson(
         Map<String, dynamic> json) =>
     _$StimulusElementImpl(
+      id: json['id'] as int,
+      recallId: json['recallId'] as int,
       data: json['data'] as String,
       delay: json['delay'] as int,
       cue: json['cue'] as String?,
@@ -49,6 +53,8 @@ _$StimulusElementImpl _$$StimulusElementImplFromJson(
 Map<String, dynamic> _$$StimulusElementImplToJson(
         _$StimulusElementImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'recallId': instance.recallId,
       'data': instance.data,
       'delay': instance.delay,
       'cue': instance.cue,

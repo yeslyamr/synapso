@@ -1,8 +1,8 @@
-import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:synapso/features/authentication/presentation/screens/new_password_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/enter_code_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/log_in_page.dart';
@@ -10,16 +10,16 @@ import 'package:synapso/features/authentication/presentation/screens/recover_pas
 import 'package:synapso/features/authentication/presentation/screens/sign_up_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/welcome_page.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
+import 'package:synapso/features/experiments_list/presentation/experiments_list_page.dart';
+import 'package:synapso/features/experiments_list/stores/experiments_list_store.dart';
 import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
 import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
 import 'package:synapso/features/recall_task/models/recall_task_model.dart';
 import 'package:synapso/features/recall_task/presentation/screens/recall_task_presentation_page.dart';
 import 'package:synapso/features/recall_task/presentation/screens/recall_task_recall_page.dart';
 import 'package:synapso/features/recognition_task/models/recognition_task_model.dart';
-import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_list_page.dart';
 import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_presentation_page.dart';
 import 'package:synapso/features/recognition_task/presentation/screens/recognition_task_recall_page.dart';
-
 
 import '../../features/profile/presentation/screens/personal_data_page.dart';
 
@@ -60,7 +60,10 @@ final GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/home',
-              builder: (BuildContext context, GoRouterState state) => const RecognitionTaskList()
+              builder: (BuildContext context, GoRouterState state) => Provider<ExperimentsListStore>(
+                create: (_) => ExperimentsListStore(),
+                child: const ExperimentsListPage(),
+              ),
             ),
           ],
         ),

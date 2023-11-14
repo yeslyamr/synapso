@@ -13,7 +13,7 @@ class ApiInterceptor extends Interceptor {
       if (options.extra['requiresAuthToken'] == true) {
         final token = await GetIt.I<KeyValueStorageService>().getAccessToken();
         options.headers.addAll(
-          <String, Object?>{'Authorization': 'Bearer $token'},
+          <String, Object?>{'Authorization': '$token'},
         );
       }
 
