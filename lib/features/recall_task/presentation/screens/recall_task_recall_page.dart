@@ -125,7 +125,6 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
                           onAccept: (value) {
                             _controllers[i].text = value;
                           },
-                          
                         ),
                       ),
                     ],
@@ -135,12 +134,12 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
                     context.loaderOverlay.show();
                     final success = await RecallTaskRepository().submitResult(
                       response:
-                          _controllers.map((e) => e.text).toList().takeWhile((value) => value.isNotEmpty).toList(),
+                          _controllers.map((e) => e.text).where((element) => element.isNotEmpty).toList(),
                       id: widget.model.id,
                       timeToComplete: stopwatch.elapsedMilliseconds,
                     );
                     if (context.mounted) {
-                      context.loaderOverlay.show();
+                      context.loaderOverlay.hide();
                       Fluttertoast.cancel();
 
                       Fluttertoast.showToast(
@@ -154,7 +153,6 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
                       );
                       context.pop();
                       context.pop();
-                                  
                     }
                   },
                   child: const Text('Submit'),
