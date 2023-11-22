@@ -9,11 +9,11 @@ part of 'experiments_list_model.dart';
 _$ExperimentsModelImpl _$$ExperimentsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ExperimentsModelImpl(
-      recall: (json['recall'] as List<dynamic>)
-          .map((e) => RecallTaskModel.fromJson(e as Map<String, dynamic>))
+      recall: (json['recall'] as List<dynamic>?)
+          ?.map((e) => RecallTaskModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      recognition: (json['recognition'] as List<dynamic>)
-          .map((e) => RecognitionTaskModel.fromJson(e as Map<String, dynamic>))
+      recognition: (json['recognition'] as List<dynamic>?)
+          ?.map((e) => RecognitionTaskModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

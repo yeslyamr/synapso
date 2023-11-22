@@ -45,7 +45,7 @@ abstract class ApiInterface {
   ///
   /// [requiresAuthToken] is used to decide if a token will be inserted
   /// in the **headers** of the request using an [ApiInterceptor]
-  Future<T> postData<T>({
+  Future<T?> postData<T>({
     required String endpoint,
     required Map<String, dynamic> body,
     CancelToken? cancelToken,

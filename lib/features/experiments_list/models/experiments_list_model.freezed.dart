@@ -20,8 +20,8 @@ ExperimentsModel _$ExperimentsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExperimentsModel {
-  List<RecallTaskModel> get recall => throw _privateConstructorUsedError;
-  List<RecognitionTaskModel> get recognition =>
+  List<RecallTaskModel>? get recall => throw _privateConstructorUsedError;
+  List<RecognitionTaskModel>? get recognition =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $ExperimentsModelCopyWith<$Res> {
       _$ExperimentsModelCopyWithImpl<$Res, ExperimentsModel>;
   @useResult
   $Res call(
-      {List<RecallTaskModel> recall, List<RecognitionTaskModel> recognition});
+      {List<RecallTaskModel>? recall, List<RecognitionTaskModel>? recognition});
 }
 
 /// @nodoc
@@ -53,18 +53,18 @@ class _$ExperimentsModelCopyWithImpl<$Res, $Val extends ExperimentsModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recall = null,
-    Object? recognition = null,
+    Object? recall = freezed,
+    Object? recognition = freezed,
   }) {
     return _then(_value.copyWith(
-      recall: null == recall
+      recall: freezed == recall
           ? _value.recall
           : recall // ignore: cast_nullable_to_non_nullable
-              as List<RecallTaskModel>,
-      recognition: null == recognition
+              as List<RecallTaskModel>?,
+      recognition: freezed == recognition
           ? _value.recognition
           : recognition // ignore: cast_nullable_to_non_nullable
-              as List<RecognitionTaskModel>,
+              as List<RecognitionTaskModel>?,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$ExperimentsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<RecallTaskModel> recall, List<RecognitionTaskModel> recognition});
+      {List<RecallTaskModel>? recall, List<RecognitionTaskModel>? recognition});
 }
 
 /// @nodoc
@@ -92,18 +92,18 @@ class __$$ExperimentsModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recall = null,
-    Object? recognition = null,
+    Object? recall = freezed,
+    Object? recognition = freezed,
   }) {
     return _then(_$ExperimentsModelImpl(
-      recall: null == recall
+      recall: freezed == recall
           ? _value._recall
           : recall // ignore: cast_nullable_to_non_nullable
-              as List<RecallTaskModel>,
-      recognition: null == recognition
+              as List<RecallTaskModel>?,
+      recognition: freezed == recognition
           ? _value._recognition
           : recognition // ignore: cast_nullable_to_non_nullable
-              as List<RecognitionTaskModel>,
+              as List<RecognitionTaskModel>?,
     ));
   }
 }
@@ -112,28 +112,32 @@ class __$$ExperimentsModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ExperimentsModelImpl implements _ExperimentsModel {
   const _$ExperimentsModelImpl(
-      {required final List<RecallTaskModel> recall,
-      required final List<RecognitionTaskModel> recognition})
+      {required final List<RecallTaskModel>? recall,
+      required final List<RecognitionTaskModel>? recognition})
       : _recall = recall,
         _recognition = recognition;
 
   factory _$ExperimentsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExperimentsModelImplFromJson(json);
 
-  final List<RecallTaskModel> _recall;
+  final List<RecallTaskModel>? _recall;
   @override
-  List<RecallTaskModel> get recall {
+  List<RecallTaskModel>? get recall {
+    final value = _recall;
+    if (value == null) return null;
     if (_recall is EqualUnmodifiableListView) return _recall;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_recall);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<RecognitionTaskModel> _recognition;
+  final List<RecognitionTaskModel>? _recognition;
   @override
-  List<RecognitionTaskModel> get recognition {
+  List<RecognitionTaskModel>? get recognition {
+    final value = _recognition;
+    if (value == null) return null;
     if (_recognition is EqualUnmodifiableListView) return _recognition;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_recognition);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -175,17 +179,17 @@ class _$ExperimentsModelImpl implements _ExperimentsModel {
 
 abstract class _ExperimentsModel implements ExperimentsModel {
   const factory _ExperimentsModel(
-          {required final List<RecallTaskModel> recall,
-          required final List<RecognitionTaskModel> recognition}) =
+          {required final List<RecallTaskModel>? recall,
+          required final List<RecognitionTaskModel>? recognition}) =
       _$ExperimentsModelImpl;
 
   factory _ExperimentsModel.fromJson(Map<String, dynamic> json) =
       _$ExperimentsModelImpl.fromJson;
 
   @override
-  List<RecallTaskModel> get recall;
+  List<RecallTaskModel>? get recall;
   @override
-  List<RecognitionTaskModel> get recognition;
+  List<RecognitionTaskModel>? get recognition;
   @override
   @JsonKey(ignore: true)
   _$$ExperimentsModelImplCopyWith<_$ExperimentsModelImpl> get copyWith =>

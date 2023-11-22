@@ -21,6 +21,8 @@ RecallTaskModel _$RecallTaskModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RecallTaskModel {
   int get id => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   Stimulus get stimulus => throw _privateConstructorUsedError;
   bool get isSequenceMatter => throw _privateConstructorUsedError;
   bool get isFreeRecall => throw _privateConstructorUsedError;
@@ -38,7 +40,12 @@ abstract class $RecallTaskModelCopyWith<$Res> {
       _$RecallTaskModelCopyWithImpl<$Res, RecallTaskModel>;
   @useResult
   $Res call(
-      {int id, Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
+      {int id,
+      int userId,
+      String name,
+      Stimulus stimulus,
+      bool isSequenceMatter,
+      bool isFreeRecall});
 
   $StimulusCopyWith<$Res> get stimulus;
 }
@@ -57,6 +64,8 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
+    Object? name = null,
     Object? stimulus = null,
     Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
@@ -66,6 +75,14 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       stimulus: null == stimulus
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
@@ -99,7 +116,12 @@ abstract class _$$RecallTaskModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, Stimulus stimulus, bool isSequenceMatter, bool isFreeRecall});
+      {int id,
+      int userId,
+      String name,
+      Stimulus stimulus,
+      bool isSequenceMatter,
+      bool isFreeRecall});
 
   @override
   $StimulusCopyWith<$Res> get stimulus;
@@ -117,6 +139,8 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
+    Object? name = null,
     Object? stimulus = null,
     Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
@@ -126,6 +150,14 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       stimulus: null == stimulus
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
@@ -147,6 +179,8 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
 class _$RecallTaskModelImpl implements _RecallTaskModel {
   const _$RecallTaskModelImpl(
       {required this.id,
+      required this.userId,
+      required this.name,
       required this.stimulus,
       required this.isSequenceMatter,
       required this.isFreeRecall});
@@ -157,6 +191,10 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
   @override
   final int id;
   @override
+  final int userId;
+  @override
+  final String name;
+  @override
   final Stimulus stimulus;
   @override
   final bool isSequenceMatter;
@@ -165,7 +203,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
 
   @override
   String toString() {
-    return 'RecallTaskModel(id: $id, stimulus: $stimulus, isSequenceMatter: $isSequenceMatter, isFreeRecall: $isFreeRecall)';
+    return 'RecallTaskModel(id: $id, userId: $userId, name: $name, stimulus: $stimulus, isSequenceMatter: $isSequenceMatter, isFreeRecall: $isFreeRecall)';
   }
 
   @override
@@ -174,6 +212,8 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
         (other.runtimeType == runtimeType &&
             other is _$RecallTaskModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.stimulus, stimulus) ||
                 other.stimulus == stimulus) &&
             (identical(other.isSequenceMatter, isSequenceMatter) ||
@@ -184,8 +224,8 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, stimulus, isSequenceMatter, isFreeRecall);
+  int get hashCode => Object.hash(
+      runtimeType, id, userId, name, stimulus, isSequenceMatter, isFreeRecall);
 
   @JsonKey(ignore: true)
   @override
@@ -205,6 +245,8 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
 abstract class _RecallTaskModel implements RecallTaskModel {
   const factory _RecallTaskModel(
       {required final int id,
+      required final int userId,
+      required final String name,
       required final Stimulus stimulus,
       required final bool isSequenceMatter,
       required final bool isFreeRecall}) = _$RecallTaskModelImpl;
@@ -214,6 +256,10 @@ abstract class _RecallTaskModel implements RecallTaskModel {
 
   @override
   int get id;
+  @override
+  int get userId;
+  @override
+  String get name;
   @override
   Stimulus get stimulus;
   @override

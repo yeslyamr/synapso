@@ -7,6 +7,8 @@ part 'recall_task_model.g.dart';
 class RecallTaskModel with _$RecallTaskModel {
   const factory RecallTaskModel({
     required int id,
+    required int userId,
+    required String name,
     required Stimulus stimulus,
     required bool isSequenceMatter,
     required bool isFreeRecall,

@@ -11,6 +11,7 @@ _$RecognitionTaskModelImpl _$$RecognitionTaskModelImplFromJson(
     _$RecognitionTaskModelImpl(
       id: json['id'] as int,
       userId: json['userId'] as int,
+      name: json['name'] as String,
       type: json['type'] as String,
       data: (json['data'] as List<dynamic>)
           .map((e) => Datum.fromJson(e as Map<String, dynamic>))
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$RecognitionTaskModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
+      'name': instance.name,
       'type': instance.type,
       'data': instance.data,
     };

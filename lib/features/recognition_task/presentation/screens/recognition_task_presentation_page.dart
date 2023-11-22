@@ -28,7 +28,7 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text('Recall task'),
+              title: const Text('Recognition task'),
               content: Text(
                   'You will be presented with a series of ${widget.recognitionTaskModel.type}. You should recall them.'),
               actions: [
@@ -85,6 +85,7 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
             );
           },
           options: CarouselOptions(
+            viewportFraction: 1,
             onPageChanged: (index, reason) async {
               _autoplayTimer?.cancel();
               _autoplayTimer = Timer.periodic(

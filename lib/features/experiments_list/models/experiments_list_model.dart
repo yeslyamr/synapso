@@ -14,8 +14,8 @@ String experimentsModelToJson(ExperimentsModel data) => json.encode(data.toJson(
 @freezed
 class ExperimentsModel with _$ExperimentsModel {
   const factory ExperimentsModel({
-    required List<RecallTaskModel> recall,
-    required List<RecognitionTaskModel> recognition,
+    required List<RecallTaskModel>? recall,
+    required List<RecognitionTaskModel>? recognition,
   }) = _ExperimentsModel;
 
   factory ExperimentsModel.fromJson(Map<String, dynamic> json) => _$ExperimentsModelFromJson(json);

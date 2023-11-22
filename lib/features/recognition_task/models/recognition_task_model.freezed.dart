@@ -22,6 +22,7 @@ RecognitionTaskModel _$RecognitionTaskModelFromJson(Map<String, dynamic> json) {
 mixin _$RecognitionTaskModel {
   int get id => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   List<Datum> get data => throw _privateConstructorUsedError;
 
@@ -37,7 +38,7 @@ abstract class $RecognitionTaskModelCopyWith<$Res> {
           $Res Function(RecognitionTaskModel) then) =
       _$RecognitionTaskModelCopyWithImpl<$Res, RecognitionTaskModel>;
   @useResult
-  $Res call({int id, int userId, String type, List<Datum> data});
+  $Res call({int id, int userId, String name, String type, List<Datum> data});
 }
 
 /// @nodoc
@@ -56,6 +57,7 @@ class _$RecognitionTaskModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? name = null,
     Object? type = null,
     Object? data = null,
   }) {
@@ -68,6 +70,10 @@ class _$RecognitionTaskModelCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -88,7 +94,7 @@ abstract class _$$RecognitionTaskModelImplCopyWith<$Res>
       __$$RecognitionTaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int userId, String type, List<Datum> data});
+  $Res call({int id, int userId, String name, String type, List<Datum> data});
 }
 
 /// @nodoc
@@ -104,6 +110,7 @@ class __$$RecognitionTaskModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? name = null,
     Object? type = null,
     Object? data = null,
   }) {
@@ -116,6 +123,10 @@ class __$$RecognitionTaskModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -134,6 +145,7 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
   const _$RecognitionTaskModelImpl(
       {required this.id,
       required this.userId,
+      required this.name,
       required this.type,
       required final List<Datum> data})
       : _data = data;
@@ -146,6 +158,8 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
   @override
   final int userId;
   @override
+  final String name;
+  @override
   final String type;
   final List<Datum> _data;
   @override
@@ -157,7 +171,7 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
 
   @override
   String toString() {
-    return 'RecognitionTaskModel(id: $id, userId: $userId, type: $type, data: $data)';
+    return 'RecognitionTaskModel(id: $id, userId: $userId, name: $name, type: $type, data: $data)';
   }
 
   @override
@@ -167,13 +181,14 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
             other is _$RecognitionTaskModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, type,
+  int get hashCode => Object.hash(runtimeType, id, userId, name, type,
       const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
@@ -196,6 +211,7 @@ abstract class _RecognitionTaskModel implements RecognitionTaskModel {
   const factory _RecognitionTaskModel(
       {required final int id,
       required final int userId,
+      required final String name,
       required final String type,
       required final List<Datum> data}) = _$RecognitionTaskModelImpl;
 
@@ -206,6 +222,8 @@ abstract class _RecognitionTaskModel implements RecognitionTaskModel {
   int get id;
   @override
   int get userId;
+  @override
+  String get name;
   @override
   String get type;
   @override

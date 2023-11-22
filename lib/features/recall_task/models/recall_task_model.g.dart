@@ -10,6 +10,8 @@ _$RecallTaskModelImpl _$$RecallTaskModelImplFromJson(
         Map<String, dynamic> json) =>
     _$RecallTaskModelImpl(
       id: json['id'] as int,
+      userId: json['userId'] as int,
+      name: json['name'] as String,
       stimulus: Stimulus.fromJson(json['stimulus'] as Map<String, dynamic>),
       isSequenceMatter: json['isSequenceMatter'] as bool,
       isFreeRecall: json['isFreeRecall'] as bool,
@@ -19,6 +21,8 @@ Map<String, dynamic> _$$RecallTaskModelImplToJson(
         _$RecallTaskModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'userId': instance.userId,
+      'name': instance.name,
       'stimulus': instance.stimulus,
       'isSequenceMatter': instance.isSequenceMatter,
       'isFreeRecall': instance.isFreeRecall,

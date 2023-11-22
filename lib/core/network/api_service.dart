@@ -59,14 +59,14 @@ class ApiService implements ApiInterface {
   }
 
   @override
-  Future<T> postData<T>({
+  Future<T?> postData<T>({
     required String endpoint,
     required Map<String, dynamic> body,
     CancelToken? cancelToken,
     bool requiresAuthToken = true,
-    required T Function(Map<String, dynamic> response) parser,
+    required T Function(Map<String, dynamic> response)? parser,
   }) async {
-    Map<String, dynamic> data;
+    Map<String, dynamic> data = {};
 
     try {
       final response = await _dioService.post(
@@ -79,19 +79,21 @@ class ApiService implements ApiInterface {
         ),
         cancelToken: cancelToken,
       );
-      if (response.data != null) {
-        data = response.data!;
-      } else {
+      if (response.data == null && parser == null) {
+        return null;
+      } else if (response.data == null && parser != null) {
         throw CustomException.fromDioException(
           Exception('Response data is null'),
         );
+      } else {
+        data = {...response.data!};
       }
     } on Exception catch (ex) {
       throw CustomException.fromDioException(ex);
     }
 
     try {
-      return parser(data);
+      return parser != null ? parser(data) : null;
     } on Exception catch (ex) {
       throw CustomException.fromParsingException(ex);
     }

@@ -45,14 +45,16 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
           } else {
             return ListView(
               children: [
-                ...store.experimentsModel?.recall.map(
+                ...store.experimentsModel?.recall?.map(
                       (e) {
                         return InkWell(
                           onTap: () {
-                            context.push(
-                              '/recall_task_presentation',
-                              extra: e,
-                            );
+                            if (e.stimulus.stimuli.isNotEmpty) {
+                              context.push(
+                                '/recall_task_presentation',
+                                extra: e,
+                              );
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -70,14 +72,16 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
                       },
                     ).toList() ??
                     [],
-                ...store.experimentsModel?.recognition.map(
+                ...store.experimentsModel?.recognition?.map(
                       (e) {
                         return InkWell(
                           onTap: () {
-                            context.push(
-                              '/recognition_task_presentation',
-                              extra: e,
-                            );
+                            if (e.data.isNotEmpty) {
+                              context.push(
+                                '/recognition_task_presentation',
+                                extra: e,
+                              );
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(

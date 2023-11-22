@@ -8,6 +8,7 @@ class RecognitionTaskModel with _$RecognitionTaskModel {
   const factory RecognitionTaskModel({
     required int id,
     required int userId,
+    required String name,
     required String type,
     required List<Datum> data,
   }) = _RecognitionTaskModel;

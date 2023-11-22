@@ -11,7 +11,7 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      return await _apiService.postData<UserModel>(
+      final userModel = await _apiService.postData<UserModel>(
         endpoint: ApiEndpoint.auth(AuthEndpoint.LOGIN),
         body: {
           "email": email,
@@ -23,6 +23,11 @@ class AuthenticationRepository {
         },
         requiresAuthToken: false,
       );
+      if (userModel != null) {
+        return userModel;
+      } else {
+        throw Exception('User not found');
+      }
     } catch (e) {
       rethrow;
     }
@@ -38,7 +43,7 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      return await _apiService.postData<UserModel>(
+      final userModel = await _apiService.postData<UserModel>(
         endpoint: ApiEndpoint.auth(AuthEndpoint.REGISTER),
         body: {
           "name": name,
@@ -55,6 +60,12 @@ class AuthenticationRepository {
         },
         requiresAuthToken: false,
       );
+
+      if (userModel != null) {
+        return userModel;
+      } else {
+        throw Exception('User not found');
+      }
     } catch (e) {
       rethrow;
     }
