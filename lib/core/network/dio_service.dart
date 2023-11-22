@@ -42,14 +42,14 @@ class DioService {
     }
   }
 
-  Future<Response<Map<String, dynamic>>> get({
+  Future<Response<T>> get<T>({
     required String endpoint,
     Map<String, dynamic>? queryParams,
     Options? options,
     CacheOptions? cacheOptions,
     CancelToken? cancelToken,
   }) async {
-    final response = await _dio.get<Map<String, dynamic>>(
+    final response = await _dio.get<T>(
       endpoint,
       queryParameters: queryParams,
       options: _mergeDioAndCacheOptions(

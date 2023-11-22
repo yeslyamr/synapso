@@ -33,6 +33,14 @@ abstract class ApiInterface {
     required T Function(Map<String, dynamic> responseBody) parser,
   });
 
+  Future<T> getListData<T>({
+    required String endpoint,
+    Map<String, dynamic>? queryParams,
+    CancelToken? cancelToken,
+    bool requiresAuthToken = true,
+    required T Function(List<dynamic> responseBody) parser,
+  });
+
   /// Base method for inserting [body] at the [endpoint].
   ///
   /// The [body] contains body for the request.

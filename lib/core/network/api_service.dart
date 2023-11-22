@@ -25,7 +25,52 @@ class ApiService implements ApiInterface {
   }) async {
     Map<String, dynamic> data;
     try {
-      final response = await _dioService.get(
+      final response = await _dioService.get<Map<String, dynamic>>(
+        endpoint: endpoint,
+        queryParams: queryParams,
+        cacheOptions: _dioService.globalCacheOptions?.copyWith(
+          policy: cachePolicy,
+          maxStale: cacheAgeDays != null ? Nullable(Duration(days: cacheAgeDays)) : null,
+        ),
+        options: Options(
+          extra: <String, Object?>{
+            'requiresAuthToken': requiresAuthToken,
+          },
+        ),
+        cancelToken: cancelToken,
+      );
+
+      if (response.data != null) {
+        data = response.data!;
+      } else {
+        throw CustomException.fromDioException(
+          Exception('Response data is null'),
+        );
+      }
+    } on Exception catch (ex) {
+      throw CustomException.fromDioException(ex);
+    }
+
+    try {
+      return parser(data);
+    } on Exception catch (ex) {
+      throw CustomException.fromParsingException(ex);
+    }
+  }
+
+  @override
+  Future<T> getListData<T>({
+    required String endpoint,
+    Map<String, dynamic>? queryParams,
+    CancelToken? cancelToken,
+    CachePolicy? cachePolicy,
+    int? cacheAgeDays,
+    bool requiresAuthToken = true,
+    required T Function(List<dynamic>) parser,
+  }) async {
+    List<dynamic> data;
+    try {
+      final response = await _dioService.get<List<dynamic>>(
         endpoint: endpoint,
         queryParams: queryParams,
         cacheOptions: _dioService.globalCacheOptions?.copyWith(

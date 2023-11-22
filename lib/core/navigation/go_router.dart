@@ -12,6 +12,8 @@ import 'package:synapso/features/authentication/presentation/screens/welcome_pag
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
 import 'package:synapso/features/experiments_list/presentation/experiments_list_page.dart';
 import 'package:synapso/features/experiments_list/stores/experiments_list_store.dart';
+import 'package:synapso/features/my_experiments/presentation/pages/my_experiments_list_page.dart';
+import 'package:synapso/features/my_experiments/store/my_experiments_list_store.dart';
 import 'package:synapso/features/profile/presentation/screens/change_password_page.dart';
 import 'package:synapso/features/profile/presentation/screens/profile_page.dart';
 import 'package:synapso/features/recall_task/models/recall_task_model.dart';
@@ -63,6 +65,17 @@ final GoRouter goRouter = GoRouter(
               builder: (BuildContext context, GoRouterState state) => Provider<ExperimentsListStore>(
                 create: (_) => ExperimentsListStore(),
                 child: const ExperimentsListPage(),
+              ),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/my_experiments',
+              builder: (BuildContext context, GoRouterState state) => Provider<MyExperimentsListStore>(
+                create: (_) => MyExperimentsListStore(),
+                child: const MyExperimentsListPage(),
               ),
             ),
           ],
@@ -183,6 +196,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
+                AssetImage('assets/icons/my_experiments.png'),
+              ),
+              label: 'My experiments',
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
                 AssetImage('assets/icons/profile.png'),
               ),
               label: 'Profile',
@@ -198,8 +217,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
     if (location.startsWith('/home')) {
       return 0;
     }
-    if (location.startsWith('/profile')) {
+    if (location.startsWith('/my_experiments')) {
       return 1;
+    }
+    if (location.startsWith('/profile')) {
+      return 2;
     }
     return 0;
   }
