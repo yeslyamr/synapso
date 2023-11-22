@@ -16,7 +16,7 @@ class RecallTaskRepository {
         parser: null,
         requiresAuthToken: true,
         body: {
-          'id': id,
+          'experimentId': id,
           'type': 'recall',
           'timeToComplete': timeToComplete,
           'response': response,

@@ -32,7 +32,7 @@ class RecogntitionTaskRepository {
         parser: null,
         requiresAuthToken: true,
         body: {
-          'id': id,
+          'experimentId': id,
           'type': 'recognition',
           'timeToComplete': timeToComplete,
           'response': response,
