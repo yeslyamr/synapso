@@ -87,11 +87,10 @@ class _RecognitionTaskRecallPageState extends State<RecognitionTaskRecallPage> {
                                   fontSize: 16.0,
                                 );
                                 context.pop();
-                                context.pop();
-                                
+                                context.go('/home');                                
                               }
                             }
-                            carouselController.nextPage(duration: const Duration(milliseconds: 150));
+                            carouselController.nextPage(duration: const Duration(milliseconds: 1));
                           },
                           child: Text(text),
                         ).paddingAll(8).expanded()

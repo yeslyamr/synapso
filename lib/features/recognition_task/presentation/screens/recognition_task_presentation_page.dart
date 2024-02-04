@@ -86,7 +86,7 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
             return Container(
               alignment: Alignment.center,
               child: Text(
-                widget.recognitionTaskModel.data[itemIndex].displayed,
+                isInterStimuliDelay ? '' : widget.recognitionTaskModel.data[itemIndex].displayed,
                 style: const TextStyle(
                   fontSize: 24,
                 ),
@@ -114,7 +114,15 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
                 await Future.delayed(
                   Duration(milliseconds: widget.recognitionTaskModel.data[index].delay),
                 );
-                if (context.mounted) context.push('/recognition_task_recall', extra: widget.recognitionTaskModel);
+                _autoplayTimer?.cancel();
+
+                if (context.mounted) {
+                  if (widget.recognitionTaskModel.isDistractionEnabled) {
+                    context.go('/distraction/recognition', extra: widget.recognitionTaskModel);
+                  } else {
+                    context.push('/recognition_task_recall', extra: widget.recognitionTaskModel);
+                  }
+                }
               }
             },
             scrollPhysics: const NeverScrollableScrollPhysics(),

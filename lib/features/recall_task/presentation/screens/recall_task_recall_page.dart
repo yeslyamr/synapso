@@ -124,8 +124,7 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
                   onPressed: () async {
                     context.loaderOverlay.show();
                     final success = await RecallTaskRepository().submitResult(
-                      response:
-                          _controllers.map((e) => e.text).where((element) => element.isNotEmpty).toList(),
+                      response: _controllers.map((e) => e.text).where((element) => element.isNotEmpty).toList(),
                       id: widget.model.id,
                       timeToComplete: stopwatch.elapsedMilliseconds,
                     );
@@ -143,7 +142,7 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
                         fontSize: 16.0,
                       );
                       context.pop();
-                      context.pop();
+                      context.go('/home');
                     }
                   },
                   child: const Text('Submit'),

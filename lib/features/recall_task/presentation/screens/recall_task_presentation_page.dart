@@ -54,7 +54,7 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
 
             isInterStimuliDelay = false;
             setState(() {});
-            carouselController.nextPage(duration: const Duration(milliseconds: 150));
+            carouselController.nextPage(duration: const Duration(milliseconds: 1));
           },
         );
       },
@@ -90,11 +90,10 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
               child: Text(
                 isInterStimuliDelay
                     ? ''
-                    :
-                widget.model.stimulus.stimuli[itemIndex].data +
-                    (widget.model.stimulus.stimuli[itemIndex].cue != null
-                        ? ' * ${widget.model.stimulus.stimuli[itemIndex].cue}'
-                        : ''),
+                    : widget.model.stimulus.stimuli[itemIndex].data +
+                        (widget.model.stimulus.stimuli[itemIndex].cue != null
+                            ? ' * ${widget.model.stimulus.stimuli[itemIndex].cue}'
+                            : ''),
                 style: const TextStyle(
                   fontSize: 24,
                 ),
@@ -112,17 +111,23 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
                   await Future.delayed(
                     Duration(milliseconds: widget.model.interStimuliDelay),
                   );
-
                   isInterStimuliDelay = false;
                   setState(() {});
-                  carouselController.nextPage(duration: const Duration(milliseconds: 150));
+                  carouselController.nextPage(duration: const Duration(milliseconds: 1));
                 },
               );
               if (index == widget.model.stimulus.stimuli.length - 1) {
                 await Future.delayed(
                   Duration(milliseconds: widget.model.stimulus.stimuli[index].delay),
                 );
-                if (context.mounted) context.push('/recall_task_recall', extra: widget.model);
+                _autoplayTimer?.cancel();
+                if (context.mounted) {
+                  if (widget.model.isDistractionEnabled) {
+                    context.go('/distraction/recall', extra: widget.model);
+                  } else {
+                    context.push('/recall_task_recall', extra: widget.model);
+                  }
+                }
               }
             },
             scrollPhysics: const NeverScrollableScrollPhysics(),

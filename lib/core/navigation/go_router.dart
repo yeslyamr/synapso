@@ -10,6 +10,7 @@ import 'package:synapso/features/authentication/presentation/screens/recover_pas
 import 'package:synapso/features/authentication/presentation/screens/sign_up_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/welcome_page.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
+import 'package:synapso/features/distraction/presentation/pages/distraction_page.dart';
 import 'package:synapso/features/experiments_list/presentation/experiments_list_page.dart';
 import 'package:synapso/features/experiments_list/stores/experiments_list_store.dart';
 import 'package:synapso/features/my_experiments/presentation/pages/my_experiments_list_page.dart';
@@ -108,6 +109,31 @@ final GoRouter goRouter = GoRouter(
       builder: (context, state) => RecallTaskPresentationPage(
         model: state.extra as RecallTaskModel,
       ),
+    ),
+    GoRoute(
+      path: '/distraction/:extype',
+      builder: (BuildContext context, GoRouterState state) {
+        final extype = state.pathParameters['extype'];
+        if (extype == 'recall') {
+          final model = state.extra as RecallTaskModel;
+          return DistractionPage(
+            experimentType: 'recall',
+            distractionType: model.distractionType,
+            distractionText: model.distractionText,
+            distractionDuration: model.distractionDuration,
+            model: model,
+          );
+        } else {
+          final model = state.extra as RecognitionTaskModel;
+          return DistractionPage(
+            experimentType: 'recognition',
+            distractionType: model.distractionType,
+            distractionText: model.distractionText,
+            distractionDuration: model.distractionDuration,
+            model: model,
+          );
+        }
+      },
     ),
     GoRoute(
       path: '/recall_task_recall',
