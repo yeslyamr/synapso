@@ -10,8 +10,12 @@ class RecallTaskModel with _$RecallTaskModel {
     required int userId,
     required String name,
     required Stimulus stimulus,
-    required bool isSequenceMatter,
     required bool isFreeRecall,
+    required bool isDistractionEnabled,
+    required String distractionType,
+    required String distractionText,
+    required int distractionDuration,
+    required int interStimuliDelay,
   }) = _RecallTaskModel;
 
   factory RecallTaskModel.fromJson(Map<String, dynamic> json) => _$RecallTaskModelFromJson(json);

@@ -10,6 +10,11 @@ class RecognitionTaskModel with _$RecognitionTaskModel {
     required int userId,
     required String name,
     required String type,
+    required bool isDistractionEnabled,
+    required String distractionType,
+    required String distractionText,
+    required int distractionDuration,
+    required int interStimuliDelay,
     required List<Datum> data,
   }) = _RecognitionTaskModel;
 

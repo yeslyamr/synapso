@@ -13,6 +13,11 @@ _$RecognitionTaskModelImpl _$$RecognitionTaskModelImplFromJson(
       userId: json['userId'] as int,
       name: json['name'] as String,
       type: json['type'] as String,
+      isDistractionEnabled: json['isDistractionEnabled'] as bool,
+      distractionType: json['distractionType'] as String,
+      distractionText: json['distractionText'] as String,
+      distractionDuration: json['distractionDuration'] as int,
+      interStimuliDelay: json['interStimuliDelay'] as int,
       data: (json['data'] as List<dynamic>)
           .map((e) => Datum.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -25,6 +30,11 @@ Map<String, dynamic> _$$RecognitionTaskModelImplToJson(
       'userId': instance.userId,
       'name': instance.name,
       'type': instance.type,
+      'isDistractionEnabled': instance.isDistractionEnabled,
+      'distractionType': instance.distractionType,
+      'distractionText': instance.distractionText,
+      'distractionDuration': instance.distractionDuration,
+      'interStimuliDelay': instance.interStimuliDelay,
       'data': instance.data,
     };
 

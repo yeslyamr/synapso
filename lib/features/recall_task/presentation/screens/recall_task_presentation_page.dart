@@ -19,6 +19,7 @@ class RecallTaskPresentationPage extends StatefulWidget {
 class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage> {
   CarouselController carouselController = CarouselController();
   Timer? _autoplayTimer;
+  bool isInterStimuliDelay = false;
 
   @override
   void initState() {
@@ -29,8 +30,8 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
           builder: (context) {
             return AlertDialog(
               title: const Text('Recall task'),
-              content: Text(
-                  'You will be presented with a series of ${widget.model.stimulus.type}. ${widget.model.isSequenceMatter ? 'You should recall them in the same order.' : 'You can recall them in any order.'}'),
+              content:
+                  Text('You will be presented with a series of ${widget.model.stimulus.type}. You should recall them.'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -44,7 +45,15 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
         );
         _autoplayTimer = Timer.periodic(
           Duration(milliseconds: widget.model.stimulus.stimuli[0].delay),
-          (timer) {
+          (timer) async {
+            isInterStimuliDelay = true;
+            setState(() {});
+            await Future.delayed(
+              Duration(milliseconds: widget.model.interStimuliDelay),
+            );
+
+            isInterStimuliDelay = false;
+            setState(() {});
             carouselController.nextPage(duration: const Duration(milliseconds: 150));
           },
         );
@@ -66,7 +75,6 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
         return true;
       },
       child: Scaffold(
-        // TODO: make core component for app bar
         appBar: AppBar(
           leading: null,
           automaticallyImplyLeading: false,
@@ -80,6 +88,9 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
             return Container(
               alignment: Alignment.center,
               child: Text(
+                isInterStimuliDelay
+                    ? ''
+                    :
                 widget.model.stimulus.stimuli[itemIndex].data +
                     (widget.model.stimulus.stimuli[itemIndex].cue != null
                         ? ' * ${widget.model.stimulus.stimuli[itemIndex].cue}'
@@ -95,7 +106,15 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
               _autoplayTimer?.cancel();
               _autoplayTimer = Timer.periodic(
                 Duration(milliseconds: widget.model.stimulus.stimuli[index].delay),
-                (timer) {
+                (_) async {
+                  isInterStimuliDelay = true;
+                  setState(() {});
+                  await Future.delayed(
+                    Duration(milliseconds: widget.model.interStimuliDelay),
+                  );
+
+                  isInterStimuliDelay = false;
+                  setState(() {});
                   carouselController.nextPage(duration: const Duration(milliseconds: 150));
                 },
               );

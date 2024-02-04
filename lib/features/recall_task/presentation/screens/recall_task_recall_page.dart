@@ -97,15 +97,6 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                widget.model.isSequenceMatter
-                    ? const Text(
-                        'You should recall in the same order as it was presented',
-                        style: TextStyle(fontSize: 18),
-                      ).paddingSymmetric(vertical: 8, horizontal: 16)
-                    : const Text(
-                        'You can recall in any order',
-                        style: TextStyle(fontSize: 18),
-                      ).paddingSymmetric(vertical: 8, horizontal: 16),
                 for (int i = 0; i < widget.model.stimulus.stimuli.length; i++)
                   Row(
                     children: [

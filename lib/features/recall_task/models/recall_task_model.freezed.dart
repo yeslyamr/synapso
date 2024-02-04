@@ -24,8 +24,12 @@ mixin _$RecallTaskModel {
   int get userId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Stimulus get stimulus => throw _privateConstructorUsedError;
-  bool get isSequenceMatter => throw _privateConstructorUsedError;
   bool get isFreeRecall => throw _privateConstructorUsedError;
+  bool get isDistractionEnabled => throw _privateConstructorUsedError;
+  String get distractionType => throw _privateConstructorUsedError;
+  String get distractionText => throw _privateConstructorUsedError;
+  int get distractionDuration => throw _privateConstructorUsedError;
+  int get interStimuliDelay => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,8 +48,12 @@ abstract class $RecallTaskModelCopyWith<$Res> {
       int userId,
       String name,
       Stimulus stimulus,
-      bool isSequenceMatter,
-      bool isFreeRecall});
+      bool isFreeRecall,
+      bool isDistractionEnabled,
+      String distractionType,
+      String distractionText,
+      int distractionDuration,
+      int interStimuliDelay});
 
   $StimulusCopyWith<$Res> get stimulus;
 }
@@ -67,8 +75,12 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
     Object? userId = null,
     Object? name = null,
     Object? stimulus = null,
-    Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
+    Object? isDistractionEnabled = null,
+    Object? distractionType = null,
+    Object? distractionText = null,
+    Object? distractionDuration = null,
+    Object? interStimuliDelay = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -87,14 +99,30 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
               as Stimulus,
-      isSequenceMatter: null == isSequenceMatter
-          ? _value.isSequenceMatter
-          : isSequenceMatter // ignore: cast_nullable_to_non_nullable
-              as bool,
       isFreeRecall: null == isFreeRecall
           ? _value.isFreeRecall
           : isFreeRecall // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDistractionEnabled: null == isDistractionEnabled
+          ? _value.isDistractionEnabled
+          : isDistractionEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      distractionType: null == distractionType
+          ? _value.distractionType
+          : distractionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionText: null == distractionText
+          ? _value.distractionText
+          : distractionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionDuration: null == distractionDuration
+          ? _value.distractionDuration
+          : distractionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      interStimuliDelay: null == interStimuliDelay
+          ? _value.interStimuliDelay
+          : interStimuliDelay // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -120,8 +148,12 @@ abstract class _$$RecallTaskModelImplCopyWith<$Res>
       int userId,
       String name,
       Stimulus stimulus,
-      bool isSequenceMatter,
-      bool isFreeRecall});
+      bool isFreeRecall,
+      bool isDistractionEnabled,
+      String distractionType,
+      String distractionText,
+      int distractionDuration,
+      int interStimuliDelay});
 
   @override
   $StimulusCopyWith<$Res> get stimulus;
@@ -142,8 +174,12 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? name = null,
     Object? stimulus = null,
-    Object? isSequenceMatter = null,
     Object? isFreeRecall = null,
+    Object? isDistractionEnabled = null,
+    Object? distractionType = null,
+    Object? distractionText = null,
+    Object? distractionDuration = null,
+    Object? interStimuliDelay = null,
   }) {
     return _then(_$RecallTaskModelImpl(
       id: null == id
@@ -162,14 +198,30 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
           ? _value.stimulus
           : stimulus // ignore: cast_nullable_to_non_nullable
               as Stimulus,
-      isSequenceMatter: null == isSequenceMatter
-          ? _value.isSequenceMatter
-          : isSequenceMatter // ignore: cast_nullable_to_non_nullable
-              as bool,
       isFreeRecall: null == isFreeRecall
           ? _value.isFreeRecall
           : isFreeRecall // ignore: cast_nullable_to_non_nullable
               as bool,
+      isDistractionEnabled: null == isDistractionEnabled
+          ? _value.isDistractionEnabled
+          : isDistractionEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      distractionType: null == distractionType
+          ? _value.distractionType
+          : distractionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionText: null == distractionText
+          ? _value.distractionText
+          : distractionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionDuration: null == distractionDuration
+          ? _value.distractionDuration
+          : distractionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      interStimuliDelay: null == interStimuliDelay
+          ? _value.interStimuliDelay
+          : interStimuliDelay // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -182,8 +234,12 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
       required this.userId,
       required this.name,
       required this.stimulus,
-      required this.isSequenceMatter,
-      required this.isFreeRecall});
+      required this.isFreeRecall,
+      required this.isDistractionEnabled,
+      required this.distractionType,
+      required this.distractionText,
+      required this.distractionDuration,
+      required this.interStimuliDelay});
 
   factory _$RecallTaskModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecallTaskModelImplFromJson(json);
@@ -197,13 +253,21 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
   @override
   final Stimulus stimulus;
   @override
-  final bool isSequenceMatter;
-  @override
   final bool isFreeRecall;
+  @override
+  final bool isDistractionEnabled;
+  @override
+  final String distractionType;
+  @override
+  final String distractionText;
+  @override
+  final int distractionDuration;
+  @override
+  final int interStimuliDelay;
 
   @override
   String toString() {
-    return 'RecallTaskModel(id: $id, userId: $userId, name: $name, stimulus: $stimulus, isSequenceMatter: $isSequenceMatter, isFreeRecall: $isFreeRecall)';
+    return 'RecallTaskModel(id: $id, userId: $userId, name: $name, stimulus: $stimulus, isFreeRecall: $isFreeRecall, isDistractionEnabled: $isDistractionEnabled, distractionType: $distractionType, distractionText: $distractionText, distractionDuration: $distractionDuration, interStimuliDelay: $interStimuliDelay)';
   }
 
   @override
@@ -216,16 +280,34 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.stimulus, stimulus) ||
                 other.stimulus == stimulus) &&
-            (identical(other.isSequenceMatter, isSequenceMatter) ||
-                other.isSequenceMatter == isSequenceMatter) &&
             (identical(other.isFreeRecall, isFreeRecall) ||
-                other.isFreeRecall == isFreeRecall));
+                other.isFreeRecall == isFreeRecall) &&
+            (identical(other.isDistractionEnabled, isDistractionEnabled) ||
+                other.isDistractionEnabled == isDistractionEnabled) &&
+            (identical(other.distractionType, distractionType) ||
+                other.distractionType == distractionType) &&
+            (identical(other.distractionText, distractionText) ||
+                other.distractionText == distractionText) &&
+            (identical(other.distractionDuration, distractionDuration) ||
+                other.distractionDuration == distractionDuration) &&
+            (identical(other.interStimuliDelay, interStimuliDelay) ||
+                other.interStimuliDelay == interStimuliDelay));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, userId, name, stimulus, isSequenceMatter, isFreeRecall);
+      runtimeType,
+      id,
+      userId,
+      name,
+      stimulus,
+      isFreeRecall,
+      isDistractionEnabled,
+      distractionType,
+      distractionText,
+      distractionDuration,
+      interStimuliDelay);
 
   @JsonKey(ignore: true)
   @override
@@ -248,8 +330,12 @@ abstract class _RecallTaskModel implements RecallTaskModel {
       required final int userId,
       required final String name,
       required final Stimulus stimulus,
-      required final bool isSequenceMatter,
-      required final bool isFreeRecall}) = _$RecallTaskModelImpl;
+      required final bool isFreeRecall,
+      required final bool isDistractionEnabled,
+      required final String distractionType,
+      required final String distractionText,
+      required final int distractionDuration,
+      required final int interStimuliDelay}) = _$RecallTaskModelImpl;
 
   factory _RecallTaskModel.fromJson(Map<String, dynamic> json) =
       _$RecallTaskModelImpl.fromJson;
@@ -263,9 +349,17 @@ abstract class _RecallTaskModel implements RecallTaskModel {
   @override
   Stimulus get stimulus;
   @override
-  bool get isSequenceMatter;
-  @override
   bool get isFreeRecall;
+  @override
+  bool get isDistractionEnabled;
+  @override
+  String get distractionType;
+  @override
+  String get distractionText;
+  @override
+  int get distractionDuration;
+  @override
+  int get interStimuliDelay;
   @override
   @JsonKey(ignore: true)
   _$$RecallTaskModelImplCopyWith<_$RecallTaskModelImpl> get copyWith =>

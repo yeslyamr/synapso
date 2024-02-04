@@ -24,6 +24,11 @@ mixin _$RecognitionTaskModel {
   int get userId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
+  bool get isDistractionEnabled => throw _privateConstructorUsedError;
+  String get distractionType => throw _privateConstructorUsedError;
+  String get distractionText => throw _privateConstructorUsedError;
+  int get distractionDuration => throw _privateConstructorUsedError;
+  int get interStimuliDelay => throw _privateConstructorUsedError;
   List<Datum> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +43,17 @@ abstract class $RecognitionTaskModelCopyWith<$Res> {
           $Res Function(RecognitionTaskModel) then) =
       _$RecognitionTaskModelCopyWithImpl<$Res, RecognitionTaskModel>;
   @useResult
-  $Res call({int id, int userId, String name, String type, List<Datum> data});
+  $Res call(
+      {int id,
+      int userId,
+      String name,
+      String type,
+      bool isDistractionEnabled,
+      String distractionType,
+      String distractionText,
+      int distractionDuration,
+      int interStimuliDelay,
+      List<Datum> data});
 }
 
 /// @nodoc
@@ -59,6 +74,11 @@ class _$RecognitionTaskModelCopyWithImpl<$Res,
     Object? userId = null,
     Object? name = null,
     Object? type = null,
+    Object? isDistractionEnabled = null,
+    Object? distractionType = null,
+    Object? distractionText = null,
+    Object? distractionDuration = null,
+    Object? interStimuliDelay = null,
     Object? data = null,
   }) {
     return _then(_value.copyWith(
@@ -78,6 +98,26 @@ class _$RecognitionTaskModelCopyWithImpl<$Res,
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      isDistractionEnabled: null == isDistractionEnabled
+          ? _value.isDistractionEnabled
+          : isDistractionEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      distractionType: null == distractionType
+          ? _value.distractionType
+          : distractionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionText: null == distractionText
+          ? _value.distractionText
+          : distractionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionDuration: null == distractionDuration
+          ? _value.distractionDuration
+          : distractionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      interStimuliDelay: null == interStimuliDelay
+          ? _value.interStimuliDelay
+          : interStimuliDelay // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -94,7 +134,17 @@ abstract class _$$RecognitionTaskModelImplCopyWith<$Res>
       __$$RecognitionTaskModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int userId, String name, String type, List<Datum> data});
+  $Res call(
+      {int id,
+      int userId,
+      String name,
+      String type,
+      bool isDistractionEnabled,
+      String distractionType,
+      String distractionText,
+      int distractionDuration,
+      int interStimuliDelay,
+      List<Datum> data});
 }
 
 /// @nodoc
@@ -112,6 +162,11 @@ class __$$RecognitionTaskModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? name = null,
     Object? type = null,
+    Object? isDistractionEnabled = null,
+    Object? distractionType = null,
+    Object? distractionText = null,
+    Object? distractionDuration = null,
+    Object? interStimuliDelay = null,
     Object? data = null,
   }) {
     return _then(_$RecognitionTaskModelImpl(
@@ -131,6 +186,26 @@ class __$$RecognitionTaskModelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
+      isDistractionEnabled: null == isDistractionEnabled
+          ? _value.isDistractionEnabled
+          : isDistractionEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      distractionType: null == distractionType
+          ? _value.distractionType
+          : distractionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionText: null == distractionText
+          ? _value.distractionText
+          : distractionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      distractionDuration: null == distractionDuration
+          ? _value.distractionDuration
+          : distractionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      interStimuliDelay: null == interStimuliDelay
+          ? _value.interStimuliDelay
+          : interStimuliDelay // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -147,6 +222,11 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
       required this.userId,
       required this.name,
       required this.type,
+      required this.isDistractionEnabled,
+      required this.distractionType,
+      required this.distractionText,
+      required this.distractionDuration,
+      required this.interStimuliDelay,
       required final List<Datum> data})
       : _data = data;
 
@@ -161,6 +241,16 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
   final String name;
   @override
   final String type;
+  @override
+  final bool isDistractionEnabled;
+  @override
+  final String distractionType;
+  @override
+  final String distractionText;
+  @override
+  final int distractionDuration;
+  @override
+  final int interStimuliDelay;
   final List<Datum> _data;
   @override
   List<Datum> get data {
@@ -171,7 +261,7 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
 
   @override
   String toString() {
-    return 'RecognitionTaskModel(id: $id, userId: $userId, name: $name, type: $type, data: $data)';
+    return 'RecognitionTaskModel(id: $id, userId: $userId, name: $name, type: $type, isDistractionEnabled: $isDistractionEnabled, distractionType: $distractionType, distractionText: $distractionText, distractionDuration: $distractionDuration, interStimuliDelay: $interStimuliDelay, data: $data)';
   }
 
   @override
@@ -183,12 +273,32 @@ class _$RecognitionTaskModelImpl implements _RecognitionTaskModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.isDistractionEnabled, isDistractionEnabled) ||
+                other.isDistractionEnabled == isDistractionEnabled) &&
+            (identical(other.distractionType, distractionType) ||
+                other.distractionType == distractionType) &&
+            (identical(other.distractionText, distractionText) ||
+                other.distractionText == distractionText) &&
+            (identical(other.distractionDuration, distractionDuration) ||
+                other.distractionDuration == distractionDuration) &&
+            (identical(other.interStimuliDelay, interStimuliDelay) ||
+                other.interStimuliDelay == interStimuliDelay) &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, name, type,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      name,
+      type,
+      isDistractionEnabled,
+      distractionType,
+      distractionText,
+      distractionDuration,
+      interStimuliDelay,
       const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
@@ -213,6 +323,11 @@ abstract class _RecognitionTaskModel implements RecognitionTaskModel {
       required final int userId,
       required final String name,
       required final String type,
+      required final bool isDistractionEnabled,
+      required final String distractionType,
+      required final String distractionText,
+      required final int distractionDuration,
+      required final int interStimuliDelay,
       required final List<Datum> data}) = _$RecognitionTaskModelImpl;
 
   factory _RecognitionTaskModel.fromJson(Map<String, dynamic> json) =
@@ -226,6 +341,16 @@ abstract class _RecognitionTaskModel implements RecognitionTaskModel {
   String get name;
   @override
   String get type;
+  @override
+  bool get isDistractionEnabled;
+  @override
+  String get distractionType;
+  @override
+  String get distractionText;
+  @override
+  int get distractionDuration;
+  @override
+  int get interStimuliDelay;
   @override
   List<Datum> get data;
   @override

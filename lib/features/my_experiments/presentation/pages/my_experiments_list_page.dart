@@ -27,32 +27,41 @@ class _MyExperimentsListPageState extends State<MyExperimentsListPage> {
     final store = Provider.of<MyExperimentsListStore>(context);
 
     return Scaffold(
-      // TODO: make core component for app bar
       appBar: AppBar(
-        title: const Text('Experiments List'),
+        title: const Text('My experiments results'),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Observer(
-        builder: (_) {
-          if (store.fetchExperiments.status == FutureStatus.pending) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (store.fetchExperiments.status == FutureStatus.rejected) {
-            return const Center(
-              child: Text('Error'),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: store.experimentsModel?.length ?? 0,
-              itemBuilder: (context, index) {
-                final experiment = store.experimentsModel![index];
-
-                return MyExperimentWidget(experiment: experiment).paddingLTRB(16.w, 0, 16.w, 16.h);
-              },
-            ).paddingOnly(top: 16.h);
-          }
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Provider.of<MyExperimentsListStore>(context, listen: false).fetchRepos();
         },
+        child: Observer(
+          builder: (_) {
+            if (store.fetchExperiments.status == FutureStatus.pending) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (store.fetchExperiments.status == FutureStatus.rejected) {
+              return const Center(
+                child: Text('Error'),
+              );
+            } else {
+              if (store.experimentsModel?.isEmpty ?? true) {
+                return const Center(
+                  child: Text('You haven\'t completed any experiments yet'),
+                );
+              }
+              return ListView.builder(
+                itemCount: store.experimentsModel?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final experiment = store.experimentsModel![index];
+
+                  return MyExperimentWidget(experiment: experiment).paddingLTRB(16.w, 0, 16.w, 16.h);
+                },
+              ).paddingOnly(top: 16.h);
+            }
+          },
+        ),
       ),
     );
   }

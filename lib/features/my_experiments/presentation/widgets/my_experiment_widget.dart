@@ -1,7 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:synapso/core/widgets/animated_expand_icon_widget.dart';
 import 'package:synapso/features/my_experiments/model/my_experiment_model.dart';
 
 class MyExperimentWidget extends StatefulWidget {
@@ -48,65 +47,42 @@ class _MyExperimentWidgetState extends State<MyExperimentWidget> with TickerProv
 
   @override
   Widget build(BuildContext context) {
-    return ExpandableNotifier(
-      controller: expandableController,
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(hasIcon: false),
-        collapsed: const SizedBox.shrink(),
-        expanded: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.zero,
-              bottom: Radius.circular(6.r),
-            ),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.zero,
+          bottom: Radius.circular(6.r),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Type:'),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: widget.experiment.type == 'recall' ? Colors.amber : Colors.blue,
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
-                    child: widget.experiment.type == 'recall'
-                        ? const Text('Recall')
-                        : const Text(
-                            'Recognition',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                  )
-                ],
-              ),
-              Text('Response: ${widget.experiment.response}'),
-              Text(
-                  'Time to complete: ${Duration(milliseconds: widget.experiment.timeToComplete).toString().split('.').first.padLeft(8, "0")}'),
+              const Text('Type:'),
+              Container(
+                decoration: BoxDecoration(
+                  color: widget.experiment.type == 'recall' ? Colors.amber : Colors.blue,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
+                child: widget.experiment.type == 'recall'
+                    ? const Text('Recall')
+                    : const Text(
+                        'Recognition',
+                        style: TextStyle(color: Colors.white),
+                      ),
+              )
             ],
           ),
-        ),
-        header: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(6.r),
-              bottom: expandableController.expanded ? Radius.zero : Radius.circular(6.r),
-            ),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
-          child: Row(
-            children: [
-              Expanded(child: Text('Name: ${widget.experiment.name}')),
-              AnimatedExpandIcon(controller: iconAnimationController)
-            ],
-          ),
-        ),
+          Text('Response: ${widget.experiment.response}'),
+          Text(
+              'Time to complete: ${Duration(milliseconds: widget.experiment.timeToComplete).toString().split('.').first.padLeft(8, "0")}'),
+        ],
       ),
     );
   }

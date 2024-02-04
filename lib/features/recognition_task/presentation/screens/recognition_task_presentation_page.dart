@@ -19,6 +19,7 @@ class RecognitionTaskPresentationPage extends StatefulWidget {
 class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresentationPage> {
   CarouselController carouselController = CarouselController();
   Timer? _autoplayTimer;
+  bool isInterStimuliDelay = false;
 
   @override
   void initState() {
@@ -44,7 +45,15 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
         );
         _autoplayTimer = Timer.periodic(
           Duration(milliseconds: widget.recognitionTaskModel.data[0].delay),
-          (timer) {
+          (_) async {
+            isInterStimuliDelay = true;
+            setState(() {});
+            await Future.delayed(
+              Duration(milliseconds: widget.recognitionTaskModel.interStimuliDelay),
+            );
+            isInterStimuliDelay = false;
+            setState(() {});
+
             carouselController.nextPage(duration: const Duration(milliseconds: 150));
           },
         );
@@ -90,7 +99,14 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
               _autoplayTimer?.cancel();
               _autoplayTimer = Timer.periodic(
                 Duration(milliseconds: widget.recognitionTaskModel.data[index].delay),
-                (timer) {
+                (_) async {
+                  isInterStimuliDelay = true;
+                  setState(() {});
+                  await Future.delayed(
+                    Duration(milliseconds: widget.recognitionTaskModel.interStimuliDelay),
+                  );
+                  isInterStimuliDelay = false;
+                  setState(() {});
                   carouselController.nextPage(duration: const Duration(milliseconds: 150));
                 },
               );

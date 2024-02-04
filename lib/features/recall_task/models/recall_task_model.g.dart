@@ -13,8 +13,12 @@ _$RecallTaskModelImpl _$$RecallTaskModelImplFromJson(
       userId: json['userId'] as int,
       name: json['name'] as String,
       stimulus: Stimulus.fromJson(json['stimulus'] as Map<String, dynamic>),
-      isSequenceMatter: json['isSequenceMatter'] as bool,
       isFreeRecall: json['isFreeRecall'] as bool,
+      isDistractionEnabled: json['isDistractionEnabled'] as bool,
+      distractionType: json['distractionType'] as String,
+      distractionText: json['distractionText'] as String,
+      distractionDuration: json['distractionDuration'] as int,
+      interStimuliDelay: json['interStimuliDelay'] as int,
     );
 
 Map<String, dynamic> _$$RecallTaskModelImplToJson(
@@ -24,8 +28,12 @@ Map<String, dynamic> _$$RecallTaskModelImplToJson(
       'userId': instance.userId,
       'name': instance.name,
       'stimulus': instance.stimulus,
-      'isSequenceMatter': instance.isSequenceMatter,
       'isFreeRecall': instance.isFreeRecall,
+      'isDistractionEnabled': instance.isDistractionEnabled,
+      'distractionType': instance.distractionType,
+      'distractionText': instance.distractionText,
+      'distractionDuration': instance.distractionDuration,
+      'interStimuliDelay': instance.interStimuliDelay,
     };
 
 _$RecallTaskModelStimulusImpl _$$RecallTaskModelStimulusImplFromJson(
