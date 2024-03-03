@@ -57,7 +57,7 @@ class _DistractionPageState extends State<DistractionPage> {
   @override
   void initState() {
     _start = widget.distractionDuration ~/ 1000;
-    question = generateArithmeticQuestion();
+    question = generateArithmeticQuestion(Difficulty.easy);
     startTimer();
     super.initState();
   }
@@ -101,7 +101,7 @@ class _DistractionPageState extends State<DistractionPage> {
             Text(
               'Time Left: $_start',
               style: const TextStyle(fontSize: 24),
-            ).expanded(),
+            ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
@@ -121,15 +121,30 @@ class _DistractionPageState extends State<DistractionPage> {
                 ),
               ),
             ).paddingAll(8),
-            for (int option in question.options)
+            for (final option in question.options)
               ElevatedButton(
                 onPressed: () {
-                  question = generateArithmeticQuestion();
+                  if (option == question.answer) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Correct!'),
+                        backgroundColor: Colors.green,
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Incorrect!'),
+                        backgroundColor: Colors.red,
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  }
+                  question = generateArithmeticQuestion(Difficulty.easy);
                   setState(() {});
                 },
-                child: Text(
-                  option.toString(),
-                ),
+                child: Text(option.toString()),
               ).paddingSymmetric(horizontal: 32.w, vertical: 8.h),
           ],
         ),
@@ -137,6 +152,8 @@ class _DistractionPageState extends State<DistractionPage> {
     );
   }
 }
+
+enum Difficulty { easy, medium, hard }
 
 class _ArithmeticQuestion {
   String question;
@@ -147,49 +164,69 @@ class _ArithmeticQuestion {
 }
 
 // ignore: library_private_types_in_public_api
-_ArithmeticQuestion generateArithmeticQuestion() {
+_ArithmeticQuestion generateArithmeticQuestion(Difficulty difficulty) {
   final rand = Random();
-  int num1 = rand.nextInt(100); // Generate a random number between 0 and 99
-  int num2 = rand.nextInt(100); // Generate a second random number between 0 and 99
-  final operations = ['+', '-', '*', '/'];
-  final operation = operations[rand.nextInt(operations.length)]; // Randomly select an operation
+  int num1, num2, result;
+  String operation;
+  List<String> operations;
 
-  int answer;
-  String question;
-
-  // Adjust for division to avoid division by zero and ensure integer result
-  if (operation == '/') {
-    num1 = num2 * (rand.nextInt(9) + 1); // Adjust num1 to ensure the division result is an integer
+  switch (difficulty) {
+    case Difficulty.easy:
+      num1 = rand.nextInt(9) + 1; // 1-9
+      num2 = rand.nextInt(9) + 1; // 1-9
+      operations = ['+', '-', '*', '/'];
+      break;
+    case Difficulty.medium:
+      num1 = rand.nextInt(90) + 10; // 10-99
+      num2 = rand.nextInt(90) + 10; // 10-99
+      operations = ['+', '-', '*', '/'];
+      // Adjusting for multiplication and division to keep numbers smaller
+      if (rand.nextBool()) {
+        num1 = rand.nextInt(16) + 10; // 10-25
+        num2 = rand.nextInt(16) + 10; // 10-25
+      }
+      break;
+    case Difficulty.hard:
+      num1 = rand.nextInt(175) + 1; // 1-175
+      num2 = rand.nextInt(175) + 1; // 1-175
+      operations = ['+', '-', '*', '/'];
+      break;
   }
 
+  // Randomly selecting an arithmetic operation
+  operation = operations[rand.nextInt(operations.length)];
+
+  // Calculating the result based on the operation
   switch (operation) {
     case '+':
-      answer = num1 + num2;
-      question = '$num1 + $num2';
+      result = num1 + num2;
       break;
     case '-':
-      answer = num1 - num2;
-      question = '$num1 - $num2';
+      result = num1 - num2;
       break;
     case '*':
-      answer = num1 * num2;
-      question = '$num1 * $num2';
+      result = num1 * num2;
       break;
     case '/':
-      answer = num1 ~/ num2;
-      question = '$num1 / $num2';
+      // Ensuring division results in a whole number
+      num2 = num2 != 0 ? num2 : 1; // Prevent division by zero
+      num1 = result = num1 - num1 % num2; // Adjust num1 to be divisible by num2
+      result = num1 ~/ num2;
       break;
     default:
-      throw 'Unsupported operation';
+      return _ArithmeticQuestion('Error', [], 0);
   }
 
-  // Generate options with more variation
-  Set<int> options = {answer};
-  while (options.length < 4) {
-    int variation = rand.nextInt(3) + 1; // Generate variation to ensure options are not too close to each other
-    int option = (rand.nextBool() ? answer + variation : answer - variation);
-    options.add(option);
+  // Generating options
+  Set<int> optionsSet = {result};
+  while (optionsSet.length < 4) {
+    int option = result + rand.nextInt(7) - 3; // Generating options around the correct answer
+    optionsSet.add(option);
   }
+  List<int> options = optionsSet.map((e) => e).toList();
+  options.shuffle(); // Shuffle the options to randomize their positions
 
-  return _ArithmeticQuestion(question, options.toList()..shuffle(), answer);
+  String question = "What is $num1 $operation $num2?";
+
+  return _ArithmeticQuestion(question, options, result);
 }
