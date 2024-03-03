@@ -31,7 +31,7 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
             return AlertDialog(
               title: const Text('Recall task'),
               content:
-                  Text('You will be presented with a series of ${widget.model.stimulus.type}. You should recall them.'),
+                  Text(widget.model.instructionText),
               actions: [
                 TextButton(
                   onPressed: () {

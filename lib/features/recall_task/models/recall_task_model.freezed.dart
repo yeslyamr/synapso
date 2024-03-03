@@ -28,6 +28,7 @@ mixin _$RecallTaskModel {
   bool get isDistractionEnabled => throw _privateConstructorUsedError;
   String get distractionType => throw _privateConstructorUsedError;
   String get distractionText => throw _privateConstructorUsedError;
+  String get instructionText => throw _privateConstructorUsedError;
   int get distractionDuration => throw _privateConstructorUsedError;
   int get interStimuliDelay => throw _privateConstructorUsedError;
 
@@ -52,6 +53,7 @@ abstract class $RecallTaskModelCopyWith<$Res> {
       bool isDistractionEnabled,
       String distractionType,
       String distractionText,
+      String instructionText,
       int distractionDuration,
       int interStimuliDelay});
 
@@ -79,6 +81,7 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
     Object? isDistractionEnabled = null,
     Object? distractionType = null,
     Object? distractionText = null,
+    Object? instructionText = null,
     Object? distractionDuration = null,
     Object? interStimuliDelay = null,
   }) {
@@ -114,6 +117,10 @@ class _$RecallTaskModelCopyWithImpl<$Res, $Val extends RecallTaskModel>
       distractionText: null == distractionText
           ? _value.distractionText
           : distractionText // ignore: cast_nullable_to_non_nullable
+              as String,
+      instructionText: null == instructionText
+          ? _value.instructionText
+          : instructionText // ignore: cast_nullable_to_non_nullable
               as String,
       distractionDuration: null == distractionDuration
           ? _value.distractionDuration
@@ -152,6 +159,7 @@ abstract class _$$RecallTaskModelImplCopyWith<$Res>
       bool isDistractionEnabled,
       String distractionType,
       String distractionText,
+      String instructionText,
       int distractionDuration,
       int interStimuliDelay});
 
@@ -178,6 +186,7 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
     Object? isDistractionEnabled = null,
     Object? distractionType = null,
     Object? distractionText = null,
+    Object? instructionText = null,
     Object? distractionDuration = null,
     Object? interStimuliDelay = null,
   }) {
@@ -214,6 +223,10 @@ class __$$RecallTaskModelImplCopyWithImpl<$Res>
           ? _value.distractionText
           : distractionText // ignore: cast_nullable_to_non_nullable
               as String,
+      instructionText: null == instructionText
+          ? _value.instructionText
+          : instructionText // ignore: cast_nullable_to_non_nullable
+              as String,
       distractionDuration: null == distractionDuration
           ? _value.distractionDuration
           : distractionDuration // ignore: cast_nullable_to_non_nullable
@@ -238,6 +251,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
       required this.isDistractionEnabled,
       required this.distractionType,
       required this.distractionText,
+      required this.instructionText,
       required this.distractionDuration,
       required this.interStimuliDelay});
 
@@ -261,13 +275,15 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
   @override
   final String distractionText;
   @override
+  final String instructionText;
+  @override
   final int distractionDuration;
   @override
   final int interStimuliDelay;
 
   @override
   String toString() {
-    return 'RecallTaskModel(id: $id, userId: $userId, name: $name, stimulus: $stimulus, isFreeRecall: $isFreeRecall, isDistractionEnabled: $isDistractionEnabled, distractionType: $distractionType, distractionText: $distractionText, distractionDuration: $distractionDuration, interStimuliDelay: $interStimuliDelay)';
+    return 'RecallTaskModel(id: $id, userId: $userId, name: $name, stimulus: $stimulus, isFreeRecall: $isFreeRecall, isDistractionEnabled: $isDistractionEnabled, distractionType: $distractionType, distractionText: $distractionText, instructionText: $instructionText, distractionDuration: $distractionDuration, interStimuliDelay: $interStimuliDelay)';
   }
 
   @override
@@ -288,6 +304,8 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
                 other.distractionType == distractionType) &&
             (identical(other.distractionText, distractionText) ||
                 other.distractionText == distractionText) &&
+            (identical(other.instructionText, instructionText) ||
+                other.instructionText == instructionText) &&
             (identical(other.distractionDuration, distractionDuration) ||
                 other.distractionDuration == distractionDuration) &&
             (identical(other.interStimuliDelay, interStimuliDelay) ||
@@ -306,6 +324,7 @@ class _$RecallTaskModelImpl implements _RecallTaskModel {
       isDistractionEnabled,
       distractionType,
       distractionText,
+      instructionText,
       distractionDuration,
       interStimuliDelay);
 
@@ -334,6 +353,7 @@ abstract class _RecallTaskModel implements RecallTaskModel {
       required final bool isDistractionEnabled,
       required final String distractionType,
       required final String distractionText,
+      required final String instructionText,
       required final int distractionDuration,
       required final int interStimuliDelay}) = _$RecallTaskModelImpl;
 
@@ -356,6 +376,8 @@ abstract class _RecallTaskModel implements RecallTaskModel {
   String get distractionType;
   @override
   String get distractionText;
+  @override
+  String get instructionText;
   @override
   int get distractionDuration;
   @override

@@ -93,44 +93,46 @@ class _DistractionPageState extends State<DistractionPage> {
       );
     }
 
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Time Left: $_start',
-            style: const TextStyle(fontSize: 24),
-          ).expanded(),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Theme.of(context).colorScheme.primary,
-                width: 2,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Time Left: $_start',
+              style: const TextStyle(fontSize: 24),
+            ).expanded(),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
               ),
-            ),
-            width: double.infinity,
-            height: 100.h,
-            alignment: Alignment.center,
-            child: Text(
-              question.question,
-              style: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ).paddingAll(8),
-          for (int option in question.options)
-            ElevatedButton(
-              onPressed: () {
-                question = generateArithmeticQuestion();
-                setState(() {});
-              },
+              width: double.infinity,
+              height: 100.h,
+              alignment: Alignment.center,
               child: Text(
-                option.toString(),
+                question.question,
+                style: TextStyle(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-            ).paddingSymmetric(horizontal: 32.w, vertical: 8.h),
-        ],
+            ).paddingAll(8),
+            for (int option in question.options)
+              ElevatedButton(
+                onPressed: () {
+                  question = generateArithmeticQuestion();
+                  setState(() {});
+                },
+                child: Text(
+                  option.toString(),
+                ),
+              ).paddingSymmetric(horizontal: 32.w, vertical: 8.h),
+          ],
+        ),
       ),
     );
   }

@@ -30,8 +30,7 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
           builder: (context) {
             return AlertDialog(
               title: const Text('Recognition task'),
-              content: Text(
-                  'You will be presented with a series of ${widget.recognitionTaskModel.type}. You should recall them.'),
+              content: Text(widget.recognitionTaskModel.instructionText),
               actions: [
                 TextButton(
                   onPressed: () {

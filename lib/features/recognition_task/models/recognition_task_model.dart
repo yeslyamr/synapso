@@ -13,6 +13,7 @@ class RecognitionTaskModel with _$RecognitionTaskModel {
     required bool isDistractionEnabled,
     required String distractionType,
     required String distractionText,
+    required String instructionText,
     required int distractionDuration,
     required int interStimuliDelay,
     required List<Datum> data,

@@ -14,6 +14,7 @@ class RecallTaskModel with _$RecallTaskModel {
     required bool isDistractionEnabled,
     required String distractionType,
     required String distractionText,
+    required String instructionText,
     required int distractionDuration,
     required int interStimuliDelay,
   }) = _RecallTaskModel;
