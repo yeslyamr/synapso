@@ -20,6 +20,7 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
   CarouselController carouselController = CarouselController();
   Timer? _autoplayTimer;
   bool isInterStimuliDelay = false;
+  int page = 0;
 
   @override
   void initState() {
@@ -52,8 +53,8 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
             );
             isInterStimuliDelay = false;
             setState(() {});
-
-            carouselController.nextPage(duration: const Duration(milliseconds: 150));
+            carouselController.jumpToPage(page + 1);
+            page++;
           },
         );
       },
@@ -106,7 +107,8 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
                   );
                   isInterStimuliDelay = false;
                   setState(() {});
-                  carouselController.nextPage(duration: const Duration(milliseconds: 150));
+                  carouselController.jumpToPage(page + 1);
+                  page++;
                 },
               );
               if (index == widget.recognitionTaskModel.data.length - 1) {

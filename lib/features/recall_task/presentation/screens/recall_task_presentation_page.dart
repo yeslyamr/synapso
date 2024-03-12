@@ -20,6 +20,7 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
   CarouselController carouselController = CarouselController();
   Timer? _autoplayTimer;
   bool isInterStimuliDelay = false;
+  int page = 0;
 
   @override
   void initState() {
@@ -30,8 +31,7 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
           builder: (context) {
             return AlertDialog(
               title: const Text('Recall task'),
-              content:
-                  Text(widget.model.instructionText),
+              content: Text(widget.model.instructionText),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -54,7 +54,8 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
 
             isInterStimuliDelay = false;
             setState(() {});
-            carouselController.nextPage(duration: const Duration(milliseconds: 1));
+            carouselController.jumpToPage(page + 1);
+            page++;
           },
         );
       },
@@ -113,7 +114,8 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
                   );
                   isInterStimuliDelay = false;
                   setState(() {});
-                  carouselController.nextPage(duration: const Duration(milliseconds: 1));
+                  carouselController.jumpToPage(page + 1);
+                  page++;
                 },
               );
               if (index == widget.model.stimulus.stimuli.length - 1) {

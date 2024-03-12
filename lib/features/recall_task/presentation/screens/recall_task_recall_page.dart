@@ -50,50 +50,50 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
             automaticallyImplyLeading: false,
             title: const Text('Recall task'),
           ),
-          bottomNavigationBar: widget.model.isFreeRecall
-              ? null
-              : Container(
-                  color: Theme.of(context).colorScheme.primary,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Builder(builder: (context) {
-                      List<StimulusElement> shuffledStimuli = [...widget.model.stimulus.stimuli]; //.shuffle();
-                      shuffledStimuli.shuffle();
-                      return Row(
-                        children: [
-                          for (int i = 0; i < shuffledStimuli.length; i++)
-                            Draggable<String>(
-                              data: shuffledStimuli[i].data,
-                              feedback: Material(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.surface,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  child: Text(
-                                    shuffledStimuli[i].data,
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                ),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.surface,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                child: Text(
-                                  shuffledStimuli[i].data,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ).paddingAll(8),
-                            )
-                        ],
-                      ).paddingSymmetric(vertical: 8, horizontal: 16);
-                    }),
-                  ),
-                ),
+          // bottomNavigationBar: widget.model.isFreeRecall
+          //     ? null
+          //     : Container(
+          //         color: Theme.of(context).colorScheme.primary,
+          //         child: SingleChildScrollView(
+          //           scrollDirection: Axis.horizontal,
+          //           child: Builder(builder: (context) {
+          //             List<StimulusElement> shuffledStimuli = [...widget.model.stimulus.stimuli]; //.shuffle();
+          //             shuffledStimuli.shuffle();
+          //             return Row(
+          //               children: [
+          //                 for (int i = 0; i < shuffledStimuli.length; i++)
+          //                   Draggable<String>(
+          //                     data: shuffledStimuli[i].data,
+          //                     feedback: Material(
+          //                       child: Container(
+          //                         decoration: BoxDecoration(
+          //                           color: Theme.of(context).colorScheme.surface,
+          //                           borderRadius: BorderRadius.circular(8),
+          //                         ),
+          //                         padding: const EdgeInsets.all(8),
+          //                         child: Text(
+          //                           shuffledStimuli[i].data,
+          //                           style: const TextStyle(fontSize: 18),
+          //                         ),
+          //                       ),
+          //                     ),
+          //                     child: Container(
+          //                       decoration: BoxDecoration(
+          //                         color: Theme.of(context).colorScheme.surface,
+          //                         borderRadius: BorderRadius.circular(8),
+          //                       ),
+          //                       padding: const EdgeInsets.all(8),
+          //                       child: Text(
+          //                         shuffledStimuli[i].data,
+          //                         style: const TextStyle(fontSize: 16),
+          //                       ),
+          //                     ).paddingAll(8),
+          //                   )
+          //               ],
+          //             ).paddingSymmetric(vertical: 8, horizontal: 16);
+          //           }),
+          //         ),
+          //       ),
           body: SingleChildScrollView(
             child: Column(
               children: [
