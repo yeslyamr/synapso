@@ -17,6 +17,7 @@ _$RecognitionTaskModelImpl _$$RecognitionTaskModelImplFromJson(
       distractionType: json['distractionType'] as String,
       distractionText: json['distractionText'] as String,
       instructionText: json['instructionText'] as String,
+      recallInstructionText: json['recallInstructionText'] as String,
       distractionDuration: json['distractionDuration'] as int,
       interStimuliDelay: json['interStimuliDelay'] as int,
       data: (json['data'] as List<dynamic>)
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$RecognitionTaskModelImplToJson(
       'distractionType': instance.distractionType,
       'distractionText': instance.distractionText,
       'instructionText': instance.instructionText,
+      'recallInstructionText': instance.recallInstructionText,
       'distractionDuration': instance.distractionDuration,
       'interStimuliDelay': instance.interStimuliDelay,
       'data': instance.data,

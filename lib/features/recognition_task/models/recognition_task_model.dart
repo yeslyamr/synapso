@@ -14,6 +14,7 @@ class RecognitionTaskModel with _$RecognitionTaskModel {
     required String distractionType,
     required String distractionText,
     required String instructionText,
+    required String recallInstructionText,
     required int distractionDuration,
     required int interStimuliDelay,
     required List<Datum> data,

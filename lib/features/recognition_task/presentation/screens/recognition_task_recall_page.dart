@@ -1,6 +1,7 @@
 import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +26,32 @@ class _RecognitionTaskRecallPageState extends State<RecognitionTaskRecallPage> {
 
   @override
   void initState() {
-    stopwatch.start();
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) async {
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Instructions'),
+              content: Text(widget.recognitionTaskModel.recallInstructionText),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Start'),
+                ),
+              ],
+            );
+          },
+        ).then(
+          (value) {
+            stopwatch.start();
+                  
+          },
+        );
+      },
+    );
     super.initState();
   }
 

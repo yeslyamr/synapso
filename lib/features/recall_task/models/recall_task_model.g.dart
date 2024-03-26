@@ -18,6 +18,7 @@ _$RecallTaskModelImpl _$$RecallTaskModelImplFromJson(
       distractionType: json['distractionType'] as String,
       distractionText: json['distractionText'] as String,
       instructionText: json['instructionText'] as String,
+      recallInstructionText: json['recallInstructionText'] as String,
       distractionDuration: json['distractionDuration'] as int,
       interStimuliDelay: json['interStimuliDelay'] as int,
     );
@@ -34,6 +35,7 @@ Map<String, dynamic> _$$RecallTaskModelImplToJson(
       'distractionType': instance.distractionType,
       'distractionText': instance.distractionText,
       'instructionText': instance.instructionText,
+      'recallInstructionText': instance.recallInstructionText,
       'distractionDuration': instance.distractionDuration,
       'interStimuliDelay': instance.interStimuliDelay,
     };

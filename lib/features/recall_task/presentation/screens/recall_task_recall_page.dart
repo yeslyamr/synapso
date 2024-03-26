@@ -1,5 +1,6 @@
 import 'package:awesome_extensions/awesome_extensions.dart' hide NavigatorExt;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -22,7 +23,32 @@ class _RecallTaskRecallPageState extends State<RecallTaskRecallPage> {
 
   @override
   void initState() {
-    stopwatch.start();
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) async {
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Instructions'),
+              content: Text(widget.model.recallInstructionText),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Start'),
+                ),
+              ],
+            );
+          },
+        ).then(
+          (value) {
+            stopwatch.start();
+              
+          },
+        );
+      },
+    );
     _controllers = [for (int i = 0; i < widget.model.stimulus.stimuli.length; i++) TextEditingController()];
     super.initState();
   }
