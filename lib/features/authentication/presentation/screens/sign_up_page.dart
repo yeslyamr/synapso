@@ -3,12 +3,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:phone_form_field/phone_form_field.dart';
-import 'package:synapso/features/authentication/stores/authentication_store.dart';
+import 'package:synapso/features/authentication/presentation/screens/survey_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -335,29 +334,43 @@ class _SignUpPageState extends State<SignUpPage> {
                           _formKey.currentState!.validate() &&
                           agreeTerms &&
                           _phoneNumberController.value != null) {
-                        context.loaderOverlay.show();
-                        final userModel = await GetIt.I<AuthenticationStore>().signUp(
+                        // context.loaderOverlay.show();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SurveyPage(
                           name: _nameController.text,
                           surname: _surnameController.text,
-                          mobileNumber:
+                              phoneNumber:
                               '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
                           gender: gender,
                           dateOfBirth: _dateOfBirthController.text,
                           email: _emailController.text,
-                          password: _passwordController.text,
-                        );
-                        if (context.mounted) context.loaderOverlay.hide();
-                        if (userModel != null && context.mounted) {
-                          context.pop();
-                          return;
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Sign up failed'),
-                              backgroundColor: Colors.red,
+                              password: _passwordController.text,   
                             ),
-                          );
-                        }
+                          ),
+                        );
+                        // final userModel = await GetIt.I<AuthenticationStore>().signUp(
+                        // name: _nameController.text,
+                        // surname: _surnameController.text,
+                        // mobileNumber:
+                        //     '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
+                        // gender: gender,
+                        // dateOfBirth: _dateOfBirthController.text,
+                        // email: _emailController.text,
+                        // password: _passwordController.text,
+                        // );
+                        // if (context.mounted) context.loaderOverlay.hide();
+                        // if (userModel != null && context.mounted) {
+                        //   context.pop();
+                        //   return;
+                        // } else {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //       content: Text('Sign up failed'),
+                        //       backgroundColor: Colors.red,
+                        //     ),
+                        //   );
+                        // }
                       } else if (!agreeTerms) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
