@@ -20,6 +20,7 @@ abstract class _ExperimentsListStoreBase with Store {
     const ExperimentsModel(
       recall: [],
       recognition: [],
+      collin: [],
     ),
   );
 

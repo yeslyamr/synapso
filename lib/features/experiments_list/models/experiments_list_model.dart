@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:synapso/features/collins/models/collins_model.dart';
 import 'package:synapso/features/recall_task/models/recall_task_model.dart';
 import 'dart:convert';
 
@@ -16,6 +17,7 @@ class ExperimentsModel with _$ExperimentsModel {
   const factory ExperimentsModel({
     required List<RecallTaskModel>? recall,
     required List<RecognitionTaskModel>? recognition,
+    required List<CollinsModel>? collin,
   }) = _ExperimentsModel;
 
   factory ExperimentsModel.fromJson(Map<String, dynamic> json) => _$ExperimentsModelFromJson(json);

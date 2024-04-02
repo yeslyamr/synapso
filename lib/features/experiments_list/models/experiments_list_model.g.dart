@@ -15,6 +15,9 @@ _$ExperimentsModelImpl _$$ExperimentsModelImplFromJson(
       recognition: (json['recognition'] as List<dynamic>?)
           ?.map((e) => RecognitionTaskModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      collin: (json['collin'] as List<dynamic>?)
+          ?.map((e) => CollinsModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ExperimentsModelImplToJson(
@@ -22,4 +25,5 @@ Map<String, dynamic> _$$ExperimentsModelImplToJson(
     <String, dynamic>{
       'recall': instance.recall,
       'recognition': instance.recognition,
+      'collin': instance.collin,
     };

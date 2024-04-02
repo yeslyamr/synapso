@@ -23,6 +23,7 @@ mixin _$ExperimentsModel {
   List<RecallTaskModel>? get recall => throw _privateConstructorUsedError;
   List<RecognitionTaskModel>? get recognition =>
       throw _privateConstructorUsedError;
+  List<CollinsModel>? get collin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,9 @@ abstract class $ExperimentsModelCopyWith<$Res> {
       _$ExperimentsModelCopyWithImpl<$Res, ExperimentsModel>;
   @useResult
   $Res call(
-      {List<RecallTaskModel>? recall, List<RecognitionTaskModel>? recognition});
+      {List<RecallTaskModel>? recall,
+      List<RecognitionTaskModel>? recognition,
+      List<CollinsModel>? collin});
 }
 
 /// @nodoc
@@ -55,6 +58,7 @@ class _$ExperimentsModelCopyWithImpl<$Res, $Val extends ExperimentsModel>
   $Res call({
     Object? recall = freezed,
     Object? recognition = freezed,
+    Object? collin = freezed,
   }) {
     return _then(_value.copyWith(
       recall: freezed == recall
@@ -65,6 +69,10 @@ class _$ExperimentsModelCopyWithImpl<$Res, $Val extends ExperimentsModel>
           ? _value.recognition
           : recognition // ignore: cast_nullable_to_non_nullable
               as List<RecognitionTaskModel>?,
+      collin: freezed == collin
+          ? _value.collin
+          : collin // ignore: cast_nullable_to_non_nullable
+              as List<CollinsModel>?,
     ) as $Val);
   }
 }
@@ -78,7 +86,9 @@ abstract class _$$ExperimentsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<RecallTaskModel>? recall, List<RecognitionTaskModel>? recognition});
+      {List<RecallTaskModel>? recall,
+      List<RecognitionTaskModel>? recognition,
+      List<CollinsModel>? collin});
 }
 
 /// @nodoc
@@ -94,6 +104,7 @@ class __$$ExperimentsModelImplCopyWithImpl<$Res>
   $Res call({
     Object? recall = freezed,
     Object? recognition = freezed,
+    Object? collin = freezed,
   }) {
     return _then(_$ExperimentsModelImpl(
       recall: freezed == recall
@@ -104,6 +115,10 @@ class __$$ExperimentsModelImplCopyWithImpl<$Res>
           ? _value._recognition
           : recognition // ignore: cast_nullable_to_non_nullable
               as List<RecognitionTaskModel>?,
+      collin: freezed == collin
+          ? _value._collin
+          : collin // ignore: cast_nullable_to_non_nullable
+              as List<CollinsModel>?,
     ));
   }
 }
@@ -113,9 +128,11 @@ class __$$ExperimentsModelImplCopyWithImpl<$Res>
 class _$ExperimentsModelImpl implements _ExperimentsModel {
   const _$ExperimentsModelImpl(
       {required final List<RecallTaskModel>? recall,
-      required final List<RecognitionTaskModel>? recognition})
+      required final List<RecognitionTaskModel>? recognition,
+      required final List<CollinsModel>? collin})
       : _recall = recall,
-        _recognition = recognition;
+        _recognition = recognition,
+        _collin = collin;
 
   factory _$ExperimentsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExperimentsModelImplFromJson(json);
@@ -140,9 +157,19 @@ class _$ExperimentsModelImpl implements _ExperimentsModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<CollinsModel>? _collin;
+  @override
+  List<CollinsModel>? get collin {
+    final value = _collin;
+    if (value == null) return null;
+    if (_collin is EqualUnmodifiableListView) return _collin;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'ExperimentsModel(recall: $recall, recognition: $recognition)';
+    return 'ExperimentsModel(recall: $recall, recognition: $recognition, collin: $collin)';
   }
 
   @override
@@ -152,7 +179,8 @@ class _$ExperimentsModelImpl implements _ExperimentsModel {
             other is _$ExperimentsModelImpl &&
             const DeepCollectionEquality().equals(other._recall, _recall) &&
             const DeepCollectionEquality()
-                .equals(other._recognition, _recognition));
+                .equals(other._recognition, _recognition) &&
+            const DeepCollectionEquality().equals(other._collin, _collin));
   }
 
   @JsonKey(ignore: true)
@@ -160,7 +188,8 @@ class _$ExperimentsModelImpl implements _ExperimentsModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_recall),
-      const DeepCollectionEquality().hash(_recognition));
+      const DeepCollectionEquality().hash(_recognition),
+      const DeepCollectionEquality().hash(_collin));
 
   @JsonKey(ignore: true)
   @override
@@ -179,9 +208,9 @@ class _$ExperimentsModelImpl implements _ExperimentsModel {
 
 abstract class _ExperimentsModel implements ExperimentsModel {
   const factory _ExperimentsModel(
-          {required final List<RecallTaskModel>? recall,
-          required final List<RecognitionTaskModel>? recognition}) =
-      _$ExperimentsModelImpl;
+      {required final List<RecallTaskModel>? recall,
+      required final List<RecognitionTaskModel>? recognition,
+      required final List<CollinsModel>? collin}) = _$ExperimentsModelImpl;
 
   factory _ExperimentsModel.fromJson(Map<String, dynamic> json) =
       _$ExperimentsModelImpl.fromJson;
@@ -190,6 +219,8 @@ abstract class _ExperimentsModel implements ExperimentsModel {
   List<RecallTaskModel>? get recall;
   @override
   List<RecognitionTaskModel>? get recognition;
+  @override
+  List<CollinsModel>? get collin;
   @override
   @JsonKey(ignore: true)
   _$$ExperimentsModelImplCopyWith<_$ExperimentsModelImpl> get copyWith =>
