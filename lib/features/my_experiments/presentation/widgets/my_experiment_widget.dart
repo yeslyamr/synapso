@@ -64,19 +64,28 @@ class _MyExperimentWidgetState extends State<MyExperimentWidget> with TickerProv
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text('Type:'),
-              Container(
-                decoration: BoxDecoration(
-                  color: widget.experiment.type == 'recall' ? Colors.amber : Colors.blue,
-                  borderRadius: BorderRadius.circular(16.r),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
-                child: widget.experiment.type == 'recall'
-                    ? const Text('Recall')
-                    : const Text(
-                        'Recognition',
-                        style: TextStyle(color: Colors.white),
-                      ),
-              )
+              Builder(builder: (context) {
+                Color color = Colors.red;
+                switch (widget.experiment.type) {
+                  case 'recall':
+                    color = Colors.amber;
+                    break;
+                  case 'recognition':
+                    color = Colors.blue;
+                    break;
+                  case 'collin':
+                    color = Colors.green;
+                    break;
+                  default:
+                }
+                return Container(
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
+                    child: Text(widget.experiment.type));
+              })
             ],
           ),
           Text('Response: ${widget.experiment.response}'),
