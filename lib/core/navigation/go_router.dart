@@ -10,6 +10,8 @@ import 'package:synapso/features/authentication/presentation/screens/recover_pas
 import 'package:synapso/features/authentication/presentation/screens/sign_up_page.dart';
 import 'package:synapso/features/authentication/presentation/screens/welcome_page.dart';
 import 'package:synapso/features/authentication/stores/authentication_store.dart';
+import 'package:synapso/features/collins/models/collins_model.dart';
+import 'package:synapso/features/collins/presentation/screens/collins_page.dart';
 import 'package:synapso/features/distraction/presentation/pages/distraction_page.dart';
 import 'package:synapso/features/experiments_list/presentation/experiments_list_page.dart';
 import 'package:synapso/features/experiments_list/stores/experiments_list_store.dart';
@@ -49,6 +51,7 @@ final GoRouter goRouter = GoRouter(
     }
   },
   routes: <RouteBase>[
+
     GoRoute(
       path: '/',
       redirect: (context, state) => '/home',
@@ -134,6 +137,13 @@ final GoRouter goRouter = GoRouter(
           );
         }
       },
+    ),
+    GoRoute(
+      path: '/collins',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => CollinsPage(
+        collinsModel: state.extra as CollinsModel,
+      ),
     ),
     GoRoute(
       path: '/recall_task_recall',

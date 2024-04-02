@@ -106,7 +106,8 @@ class ApiService implements ApiInterface {
   @override
   Future<T?> postData<T>({
     required String endpoint,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic>? body,
+    List<dynamic>? listData,
     CancelToken? cancelToken,
     bool requiresAuthToken = true,
     required T Function(Map<String, dynamic> response)? parser,
@@ -117,6 +118,7 @@ class ApiService implements ApiInterface {
       final response = await _dioService.post(
         endpoint: endpoint,
         data: body,
+        listData: listData,
         options: Options(
           extra: <String, Object?>{
             'requiresAuthToken': requiresAuthToken,

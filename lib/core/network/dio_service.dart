@@ -64,12 +64,13 @@ class DioService {
   Future<Response<Map<String, dynamic>>> post({
     required String endpoint,
     Map<String, dynamic>? data,
+    List<dynamic>? listData,
     Options? options,
     CancelToken? cancelToken,
   }) async {
     final response = await _dio.post<Map<String, dynamic>>(
       endpoint,
-      data: data,
+      data: listData ?? data,
       options: options,
       cancelToken: cancelToken ?? _cancelToken,
     );

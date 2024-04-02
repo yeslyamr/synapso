@@ -55,7 +55,8 @@ abstract class ApiInterface {
   /// in the **headers** of the request using an [ApiInterceptor]
   Future<T?> postData<T>({
     required String endpoint,
-    required Map<String, dynamic> body,
+    required Map<String, dynamic>? body,
+    List<dynamic> listData,
     CancelToken? cancelToken,
     bool requiresAuthToken = true,
     required T Function(Map<String, dynamic> response) parser,

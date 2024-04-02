@@ -12,5 +12,6 @@
         "android": true,
         "build": true,
         "ios": true
-    }
+    },
+    "debug.toolBarLocation": "commandCenter"
 }

@@ -220,12 +220,12 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
                           (e) {
                             return InkWell(
                               onTap: () {
-                                // if (e.data.isNotEmpty) {
-                                //   context.push(
-                                //     '/recognition_task_presentation',
-                                //     extra: e,
-                                //   );
-                                // }
+                                if (e.data.isNotEmpty) {
+                                  context.push(
+                                    '/collins',
+                                    extra: e,
+                                  );
+                                }
                               },
                               child: Container(
                                 decoration: BoxDecoration(
