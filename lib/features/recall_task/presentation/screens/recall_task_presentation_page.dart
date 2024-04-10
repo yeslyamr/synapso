@@ -71,10 +71,8 @@ class _RecallTaskPresentationPageState extends State<RecallTaskPresentationPage>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
           leading: null,

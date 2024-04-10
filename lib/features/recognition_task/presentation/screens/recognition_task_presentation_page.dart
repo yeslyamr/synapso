@@ -70,12 +70,12 @@ class _RecognitionTaskPresentationPageState extends State<RecognitionTaskPresent
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
+          leading: null,
+          automaticallyImplyLeading: false,
           title: const Text('Recognition Task presentation'),
         ),
         body: CarouselSlider.builder(

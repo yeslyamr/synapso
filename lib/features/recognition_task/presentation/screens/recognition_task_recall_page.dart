@@ -63,79 +63,84 @@ class _RecognitionTaskRecallPageState extends State<RecognitionTaskRecallPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LoaderOverlay(
-      overlayOpacity: 0.5,
-      overlayColor: Colors.grey.shade200.withOpacity(0.5),
-      overlayWidget: const CircularProgressIndicator.adaptive(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Recognition Task Recall'),
-        ),
-        body: CarouselSlider.builder(
-          carouselController: carouselController,
-          disableGesture: true,
-          itemCount: widget.recognitionTaskModel.data.length,
-          itemBuilder: (context, itemIndex, _) {
-            return Container(
-              alignment: Alignment.center,
-              height: 50.h,
-              child: Builder(
-                builder: (context) {
-                  List<String> randomOrder = [
-                    widget.recognitionTaskModel.data[itemIndex].displayed,
-                    widget.recognitionTaskModel.data[itemIndex].hidden
-                  ];
-                  randomOrder.shuffle();
-                  return Row(
-                    children: [
-                      for (final text in randomOrder)
-                        ElevatedButton(
-                          onPressed: () async {
-                            response.add(text);
-                            if (itemIndex == widget.recognitionTaskModel.data.length - 1) {
-                              context.loaderOverlay.show();
-                              final success = await RecogntitionTaskRepository().submitResult(
-                                response: response,
-                                id: widget.recognitionTaskModel.id,
-                                timeToComplete: stopwatch.elapsedMilliseconds,
-                              );
-                              if (context.mounted) {
+    return PopScope(
+      canPop: false,
+      child: LoaderOverlay(
+        overlayOpacity: 0.5,
+        overlayColor: Colors.grey.shade200.withOpacity(0.5),
+        overlayWidget: const CircularProgressIndicator.adaptive(),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: null,
+            automaticallyImplyLeading: false,
+            title: const Text('Recognition Task Recall'),
+          ),
+          body: CarouselSlider.builder(
+            carouselController: carouselController,
+            disableGesture: true,
+            itemCount: widget.recognitionTaskModel.data.length,
+            itemBuilder: (context, itemIndex, _) {
+              return Container(
+                alignment: Alignment.center,
+                height: 50.h,
+                child: Builder(
+                  builder: (context) {
+                    List<String> randomOrder = [
+                      widget.recognitionTaskModel.data[itemIndex].displayed,
+                      widget.recognitionTaskModel.data[itemIndex].hidden
+                    ];
+                    randomOrder.shuffle();
+                    return Row(
+                      children: [
+                        for (final text in randomOrder)
+                          ElevatedButton(
+                            onPressed: () async {
+                              response.add(text);
+                              if (itemIndex == widget.recognitionTaskModel.data.length - 1) {
                                 context.loaderOverlay.show();
-                                Fluttertoast.cancel();
-
-                                Fluttertoast.showToast(
-                                  msg: success ? 'Submitted' : 'Failed',
-                                  backgroundColor: success ? Colors.green : Theme.of(context).colorScheme.error,
-                                  textColor: Colors.white,
-                                  gravity: ToastGravity.BOTTOM,
-                                  toastLength: Toast.LENGTH_LONG,
-                                  timeInSecForIosWeb: 1,
-                                  fontSize: 16.0,
+                                final success = await RecogntitionTaskRepository().submitResult(
+                                  response: response,
+                                  id: widget.recognitionTaskModel.id,
+                                  timeToComplete: stopwatch.elapsedMilliseconds,
                                 );
-                                context.pop();
-                                context.go('/home');                                
+                                if (context.mounted) {
+                                  context.loaderOverlay.show();
+                                  Fluttertoast.cancel();
+
+                                  Fluttertoast.showToast(
+                                    msg: success ? 'Submitted' : 'Failed',
+                                    backgroundColor: success ? Colors.green : Theme.of(context).colorScheme.error,
+                                    textColor: Colors.white,
+                                    gravity: ToastGravity.BOTTOM,
+                                    toastLength: Toast.LENGTH_LONG,
+                                    timeInSecForIosWeb: 1,
+                                    fontSize: 16.0,
+                                  );
+                                  context.pop();
+                                  context.go('/home');
+                                }
                               }
-                            }
-                            carouselController.nextPage(duration: const Duration(milliseconds: 1));
-                          },
-                          child: Text(text),
-                        ).paddingAll(8).expanded()
-                    ],
-                  );
-                },
-              ),
-            );
-          },
-          options: CarouselOptions(
-            scrollPhysics: const NeverScrollableScrollPhysics(),
-            autoPlay: false,
-            height: context.height,
-            viewportFraction: 1,
-            enlargeCenterPage: true,
-            pauseAutoPlayOnManualNavigate: false,
-            pauseAutoPlayOnTouch: false,
-            pauseAutoPlayInFiniteScroll: false,
-            enableInfiniteScroll: false,
+                              carouselController.nextPage(duration: const Duration(milliseconds: 1));
+                            },
+                            child: Text(text),
+                          ).paddingAll(8).expanded()
+                      ],
+                    );
+                  },
+                ),
+              );
+            },
+            options: CarouselOptions(
+              scrollPhysics: const NeverScrollableScrollPhysics(),
+              autoPlay: false,
+              height: context.height,
+              viewportFraction: 1,
+              enlargeCenterPage: true,
+              pauseAutoPlayOnManualNavigate: false,
+              pauseAutoPlayOnTouch: false,
+              pauseAutoPlayInFiniteScroll: false,
+              enableInfiniteScroll: false,
+            ),
           ),
         ),
       ),
