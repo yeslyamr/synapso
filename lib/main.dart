@@ -13,7 +13,9 @@ void main() async {
 
   setupApiService();
 
-  GetIt.I.registerSingleton<AuthenticationStore>(AuthenticationStore()..checkIfSignedIn());
+  GetIt.I.registerSingleton<AuthenticationStore>(AuthenticationStore());
+
+  await GetIt.I.get<AuthenticationStore>().checkIfSignedIn();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
