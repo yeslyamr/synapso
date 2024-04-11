@@ -140,13 +140,6 @@ class _LogInPageState extends State<LogInPage> {
                       },
                       child: const Text('Login'),
                     ).paddingOnly(bottom: 12.h, top: 32.h),
-                    OutlinedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        context.push('/sign_up');
-                      },
-                      child: const Text('Registration'),
-                    ).paddingOnly(bottom: 12.h),
                     TextButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();

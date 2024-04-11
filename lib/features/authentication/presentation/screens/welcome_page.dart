@@ -50,9 +50,9 @@ class WelcomePage extends StatelessWidget {
                   ).paddingOnly(bottom: 12.h),
                   OutlinedButton(
                     onPressed: () {
-                      //TODO: implement on tap
+                      context.push('/sign_up');
                     },
-                    child: const Text('About app'),
+                    child: const Text('Registration'),
                   ),
                 ],
               ),
