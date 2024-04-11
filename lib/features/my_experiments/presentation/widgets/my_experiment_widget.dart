@@ -84,7 +84,7 @@ class _MyExperimentWidgetState extends State<MyExperimentWidget> with TickerProv
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
-                    child: Text(widget.experiment.type));
+                    child: Text(widget.experiment.type == 'collin' ? 'semantics' : widget.experiment.type));
               })
             ],
           ),

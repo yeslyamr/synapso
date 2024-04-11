@@ -62,7 +62,7 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
                 DropdownMenuItem<int>(
                   value: 2,
                   child: Text(
-                    'Collins',
+                    'Semantics',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Colors.white),
                   ),
@@ -235,7 +235,8 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Collins Task:  ${e.name.isEmpty ? 'Collins #${e.id}' : e.name}'),
+                                    Text(
+                                        'Semantics Experiment:  ${e.name.isEmpty ? 'Semantics Experiment #${e.id}' : e.name}'),
                                   ],
                                 ).paddingSymmetric(vertical: 16.h, horizontal: 12.w),
                               ).paddingSymmetric(vertical: 8.h, horizontal: 16.w),

@@ -72,7 +72,7 @@ class _CollinsPageState extends State<CollinsPage> {
         canPop: false,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Collins'),
+            title: const Text('Semantics Experiment'),
             leading: null,
             automaticallyImplyLeading: false,
           ),
