@@ -36,80 +36,99 @@ class _SurveyPageState extends State<SurveyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LoaderOverlay(
-      overlayOpacity: 0.5,
-      overlayColor: Colors.grey.shade200.withOpacity(0.5),
-      overlayWidget: const CircularProgressIndicator.adaptive(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              if (context.canPop()) context.pop();
-            },
-            icon: Image.asset(
-              'assets/icons/arrow_back.png',
-              height: 30.h,
-              width: 30.h,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: LoaderOverlay(
+        overlayOpacity: 0.5,
+        overlayColor: Colors.grey.shade200.withOpacity(0.5),
+        overlayWidget: const CircularProgressIndicator.adaptive(),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                if (context.canPop()) context.pop();
+              },
+              icon: Image.asset(
+                'assets/icons/arrow_back.png',
+                height: 30.h,
+                width: 30.h,
+              ),
             ),
+            title: const Text(''),
           ),
-          title: const Text(''),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MySurveyWidget(
-                question: 'How do you evaluate your memory in academic performance?',
-                lowerBound: '1',
-                upperBound: '5',
-                groupValue: _firstQuestion,
-              ).paddingOnly(bottom: 24.h),
-              MySurveyWidget(
-                question: 'How do you evaluate your memory in remembering events of your life?',
-                lowerBound: '1',
-                upperBound: '5',
-                groupValue: _secondQuestion,
-              ).paddingOnly(bottom: 24.h),
-              MySurveyWidget(
-                question:
-                    'How do you evaluate your memory in carrying out tasks which require you to temporarily remember information or results?',
-                lowerBound: '1',
-                upperBound: '5',
-                groupValue: _thirdQuestion,
-              ).paddingOnly(bottom: 24.h),
-              ElevatedButton(
-                onPressed: () async {
-                  context.loaderOverlay.show();
-                  final userModel = await GetIt.I<AuthenticationStore>().signUp(
-                    name: widget.name,
-                    surname: widget.surname,
-                    mobileNumber: widget.phoneNumber,
-                    gender: widget.gender,
-                    dateOfBirth: widget.dateOfBirth,
-                    email: widget.email,
-                    password: widget.password,
-                  );
-                  if (context.mounted) context.loaderOverlay.hide();
-                  if (userModel != null && context.mounted) {
-                    context.pop();
-                    return;
-                  } else {
-                    if (context.mounted) {
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MySurveyWidget(
+                  question: 'How do you evaluate your memory in academic performance?',
+                  lowerBound: '1',
+                  upperBound: '5',
+                  groupValue: _firstQuestion,
+                ).paddingOnly(bottom: 24.h),
+                MySurveyWidget(
+                  question: 'How do you evaluate your memory in remembering events of your life?',
+                  lowerBound: '1',
+                  upperBound: '5',
+                  groupValue: _secondQuestion,
+                ).paddingOnly(bottom: 24.h),
+                MySurveyWidget(
+                  question:
+                      'How do you evaluate your memory in carrying out tasks which require you to temporarily remember information or results?',
+                  lowerBound: '1',
+                  upperBound: '5',
+                  groupValue: _thirdQuestion,
+                ).paddingOnly(bottom: 24.h),
+                ElevatedButton(
+                  onPressed: () async {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    if (_firstQuestion.value == 0 || _secondQuestion.value == 0 || _thirdQuestion.value == 0) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Sign up failed'),
+                          content: Text('Please answer all questions'),
                           backgroundColor: Colors.red,
                         ),
                       );
+                      return;
+                    } else {
+                      context.loaderOverlay.show();
+                      final userModel = await GetIt.I<AuthenticationStore>().signUp(
+                        name: widget.name,
+                        surname: widget.surname,
+                        mobileNumber: widget.phoneNumber,
+                        gender: widget.gender,
+                        dateOfBirth: widget.dateOfBirth,
+                        email: widget.email,
+                        password: widget.password,
+                        question1: _firstQuestion.value,
+                        question2: _secondQuestion.value,
+                        question3: _thirdQuestion.value,
+                      );
+                      if (context.mounted) context.loaderOverlay.hide();
+                      if (userModel != null && context.mounted) {
+                        context.pop();
+                        return;
+                      } else {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Sign up failed'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      }
+                      if (context.mounted) context.pop();
+                      if (context.mounted) context.pop();
                     }
-                  }
-                  if (context.mounted) context.pop();
-                  if (context.mounted) context.pop();
-                },
-                child: const Text('Create account'),
-              ).paddingSymmetric(vertical: 16.h),
-            ],
-          ).paddingSymmetric(horizontal: 16.w),
+                  },
+                  child: const Text('Create account'),
+                ).paddingSymmetric(vertical: 16.h),
+              ],
+            ).paddingSymmetric(horizontal: 16.w),
+          ),
         ),
       ),
     );

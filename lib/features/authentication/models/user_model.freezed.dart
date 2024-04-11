@@ -28,6 +28,9 @@ mixin _$UserModel {
   String? get gender => throw _privateConstructorUsedError;
   String? get dateOfBirth => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
+  int? get question1 => throw _privateConstructorUsedError;
+  int? get question2 => throw _privateConstructorUsedError;
+  int? get question3 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +51,10 @@ abstract class $UserModelCopyWith<$Res> {
       String? mobileNumber,
       String? gender,
       String? dateOfBirth,
-      String? role});
+      String? role,
+      int? question1,
+      int? question2,
+      int? question3});
 }
 
 /// @nodoc
@@ -72,6 +78,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? gender = freezed,
     Object? dateOfBirth = freezed,
     Object? role = freezed,
+    Object? question1 = freezed,
+    Object? question2 = freezed,
+    Object? question3 = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -106,6 +115,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String?,
+      question1: freezed == question1
+          ? _value.question1
+          : question1 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      question2: freezed == question2
+          ? _value.question2
+          : question2 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      question3: freezed == question3
+          ? _value.question3
+          : question3 // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -126,7 +147,10 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? mobileNumber,
       String? gender,
       String? dateOfBirth,
-      String? role});
+      String? role,
+      int? question1,
+      int? question2,
+      int? question3});
 }
 
 /// @nodoc
@@ -148,6 +172,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? dateOfBirth = freezed,
     Object? role = freezed,
+    Object? question1 = freezed,
+    Object? question2 = freezed,
+    Object? question3 = freezed,
   }) {
     return _then(_$UserModelImpl(
       id: freezed == id
@@ -182,6 +209,18 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String?,
+      question1: freezed == question1
+          ? _value.question1
+          : question1 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      question2: freezed == question2
+          ? _value.question2
+          : question2 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      question3: freezed == question3
+          ? _value.question3
+          : question3 // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -198,7 +237,10 @@ class _$UserModelImpl implements _UserModel {
       required this.mobileNumber,
       required this.gender,
       required this.dateOfBirth,
-      required this.role});
+      required this.role,
+      required this.question1,
+      required this.question2,
+      required this.question3});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -219,10 +261,16 @@ class _$UserModelImpl implements _UserModel {
   final String? dateOfBirth;
   @override
   final String? role;
+  @override
+  final int? question1;
+  @override
+  final int? question2;
+  @override
+  final int? question3;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, surname: $surname, email: $email, mobileNumber: $mobileNumber, gender: $gender, dateOfBirth: $dateOfBirth, role: $role)';
+    return 'UserModel(id: $id, name: $name, surname: $surname, email: $email, mobileNumber: $mobileNumber, gender: $gender, dateOfBirth: $dateOfBirth, role: $role, question1: $question1, question2: $question2, question3: $question3)';
   }
 
   @override
@@ -239,13 +287,19 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
-            (identical(other.role, role) || other.role == role));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.question1, question1) ||
+                other.question1 == question1) &&
+            (identical(other.question2, question2) ||
+                other.question2 == question2) &&
+            (identical(other.question3, question3) ||
+                other.question3 == question3));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, surname, email,
-      mobileNumber, gender, dateOfBirth, role);
+      mobileNumber, gender, dateOfBirth, role, question1, question2, question3);
 
   @JsonKey(ignore: true)
   @override
@@ -270,7 +324,10 @@ abstract class _UserModel implements UserModel {
       required final String? mobileNumber,
       required final String? gender,
       required final String? dateOfBirth,
-      required final String? role}) = _$UserModelImpl;
+      required final String? role,
+      required final int? question1,
+      required final int? question2,
+      required final int? question3}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -291,6 +348,12 @@ abstract class _UserModel implements UserModel {
   String? get dateOfBirth;
   @override
   String? get role;
+  @override
+  int? get question1;
+  @override
+  int? get question2;
+  @override
+  int? get question3;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

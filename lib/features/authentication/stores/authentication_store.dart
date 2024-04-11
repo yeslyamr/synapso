@@ -43,6 +43,9 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
     required String dateOfBirth,
     required String email,
     required String password,
+    required int question1,
+    required int question2,
+    required int question3,
   }) async {
     try {
       final UserModel userModel = await _authenticationRepository.signUp(
@@ -53,6 +56,9 @@ abstract class _AuthenticationStoreBase with Store, ChangeNotifier {
         dateOfBirth: dateOfBirth,
         email: email,
         password: password,
+        question1: question1,
+        question2: question2,
+        question3: question3,
       );
 
       GetIt.I.get<KeyValueStorageService>().setUserModel(userModel);

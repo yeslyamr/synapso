@@ -89,21 +89,10 @@ class _LogInPageState extends State<LogInPage> {
                       obscureText: isPasswordObscure,
                       obscuringCharacter: '*',
                       validator: (value) {
-                        final numericRegExp = RegExp(r'[0-9]');
-                        final specialCharRegExp =
-                            RegExp(r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+=' // <-- Notice the escaped symbols
-                                "'" // <-- ' is added to the expression
-                                ']');
                         if (value == null || value.isEmpty) {
                           return 'Please enter your password';
-                        } else if (!value.hasCapitalletter() ||
-                            !value.contains(specialCharRegExp) ||
-                            !value.contains(numericRegExp) ||
-                            value.length < 8) {
-                          return 'The password must contain: 1 capital letter, number, special character. Minimum number of characters - 8';
-                        } else {
-                          return null;
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         hintText: 'Password',

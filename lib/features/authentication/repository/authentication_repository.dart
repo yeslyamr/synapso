@@ -41,6 +41,9 @@ class AuthenticationRepository {
     required String dateOfBirth,
     required String email,
     required String password,
+    required int question1,
+    required int question2,
+    required int question3,
   }) async {
     try {
       final userModel = await _apiService.postData<UserModel>(
@@ -53,7 +56,10 @@ class AuthenticationRepository {
           "mobile_number": mobileNumber,
           "gender": gender,
           "date_of_birth": dateOfBirth,
-          "role": "subject"
+          "role": "subject",
+          "question1": question1,
+          "question2": question2,
+          "question3": question3,
         },
         parser: (json) {
           return UserModel.fromJson(json);

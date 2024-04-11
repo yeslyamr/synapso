@@ -15,6 +15,9 @@ class UserModel with _$UserModel {
     required String? gender,
     required String? dateOfBirth,
     required String? role,
+    required int? question1,
+    required int? question2,
+    required int? question3,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);

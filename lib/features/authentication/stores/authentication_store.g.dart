@@ -45,7 +45,10 @@ mixin _$AuthenticationStore on _AuthenticationStoreBase, Store {
       required String gender,
       required String dateOfBirth,
       required String email,
-      required String password}) {
+      required String password,
+      required int question1,
+      required int question2,
+      required int question3}) {
     return _$signUpAsyncAction.run(() => super.signUp(
         name: name,
         surname: surname,
@@ -53,7 +56,10 @@ mixin _$AuthenticationStore on _AuthenticationStoreBase, Store {
         gender: gender,
         dateOfBirth: dateOfBirth,
         email: email,
-        password: password));
+        password: password,
+        question1: question1,
+        question2: question2,
+        question3: question3));
   }
 
   late final _$logOutAsyncAction =
