@@ -96,7 +96,7 @@ class _ExperimentsListPageState extends State<ExperimentsListPage> {
                               ? 'Recall'
                               : selectedExperimentType == 1
                                   ? 'Recognition'
-                                  : 'Collins',
+                                  : 'Semantics',
                       style: const TextStyle(color: Colors.white),
                     ),
                     const SizedBox(width: 8),
