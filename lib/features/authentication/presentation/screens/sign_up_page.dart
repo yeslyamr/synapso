@@ -337,15 +337,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         // context.loaderOverlay.show();
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => SurveyPage(
-                          name: _nameController.text,
-                          surname: _surnameController.text,
-                              phoneNumber:
-                              '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
-                          gender: gender,
-                          dateOfBirth: _dateOfBirthController.text,
-                          email: _emailController.text,
-                              password: _passwordController.text,   
+                            builder: (context) => LoaderOverlay(
+                              overlayOpacity: 0.5,
+                              overlayColor: Colors.grey.shade200.withOpacity(0.5),
+                              overlayWidget: const CircularProgressIndicator.adaptive(),
+                              child: SurveyPage(
+                                name: _nameController.text,
+                                surname: _surnameController.text,
+                                phoneNumber:
+                                    '+${_phoneNumberController.value!.countryCode}${_phoneNumberController.value!.nsn}',
+                                gender: gender,
+                                dateOfBirth: _dateOfBirthController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              ),
                             ),
                           ),
                         );

@@ -108,8 +108,12 @@ class _SurveyPageState extends State<SurveyPage> {
                       );
                       if (context.mounted) context.loaderOverlay.hide();
                       if (userModel != null && context.mounted) {
-                        context.pop();
-                        return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Succesfully signed up!'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
                       } else {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
